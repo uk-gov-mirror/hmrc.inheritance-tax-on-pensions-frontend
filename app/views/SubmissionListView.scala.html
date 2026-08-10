@@ -171,7 +171,7 @@
                                 <tr class="govuk-table__row">
                                     <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">@reportLink(report).asHtml</th>
                                     <td class="govuk-table__cell">@report.ihtpStatus</td>
-                                    <td class="govuk-table__cell">@report.paymentDueDate.format(DateTimeFormats.dateTimeFormat()(using messages.lang))</td>
+                                    <td class="govuk-table__cell">@report.paymentDueDate.get.format(DateTimeFormats.dateTimeFormat()(using messages.lang))</td>
                                     <td class="govuk-table__cell">@paymentReferenceContent(report).asHtml</td>
                                 </tr>
                             }

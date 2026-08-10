@@ -37,16 +37,16 @@ class SubmissionListControllerSpec extends SpecBase {
   lazy val onPageLoadUrl: String = routes.SubmissionListController.onPageLoad(srn).url
 
   private val overviewReport = IhtpOverviewReport(
-    fbNumber = "119000004320",
-    submissionDate = Instant.parse("2026-04-10T16:12:49Z"),
-    paymentDueDate = LocalDate.of(2026, 2, 2),
+    fbNumber = Some("119000004320"),
+    submissionDate = Some(Instant.parse("2026-04-10T16:12:49Z")),
+    paymentDueDate = Some(LocalDate.of(2026, 2, 2)),
     ihtpVersion = "001",
     inheritanceTaxReference = "A123456/25A",
     paymentReference = Some("A123456/25A629671"),
     title = Some("Dr"),
-    firstForename = "Peter",
-    secondForename = Some("Michael"),
-    surname = "Smith",
+    firstForename = Some("John"),
+    secondForename = Some("M"),
+    surname = Some("Doe"),
     nino = None,
     ihtpStatus = "Not reconciled"
   )
@@ -178,8 +178,8 @@ class SubmissionListControllerSpec extends SpecBase {
       val mockSubmissionListService = mock[SubmissionListService]
       val reports = (1 to 16).map { index =>
         overviewReport.copy(
-          fbNumber = f"1190000043$index%02d",
-          firstForename = if (index % 2 == 0) "Jane" else "John",
+          fbNumber = Some(f"1190000043$index%02d"),
+          firstForename = Some(if (index % 2 == 0) "Jane" else "John"),
           secondForename = Some(s"Middle$index"),
           paymentReference = Some(f"PR$index%09d")
         )

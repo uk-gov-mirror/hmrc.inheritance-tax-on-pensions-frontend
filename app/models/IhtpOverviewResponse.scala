@@ -33,22 +33,22 @@ object IhtpOverviewSuccess {
 }
 
 case class IhtpOverviewReport(
-  fbNumber: String,
-  submissionDate: Instant,
-  paymentDueDate: LocalDate,
+  fbNumber: Option[String],
+  submissionDate: Option[Instant],
+  paymentDueDate: Option[LocalDate],
   ihtpVersion: String,
   inheritanceTaxReference: String,
   paymentReference: Option[String],
   title: Option[String],
-  firstForename: String,
+  firstForename: Option[String],
   secondForename: Option[String],
-  surname: String,
+  surname: Option[String],
   nino: Option[String],
   ihtpStatus: String
 ) {
 
   val deceasedName: String =
-    Seq(title, Some(firstForename), secondForename, Some(surname)).flatten.filter(_.nonEmpty).mkString(" ")
+    Seq(title, firstForename, secondForename, surname).flatten.filter(_.nonEmpty).mkString(" ")
 }
 
 object IhtpOverviewReport {

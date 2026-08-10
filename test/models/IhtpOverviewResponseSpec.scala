@@ -27,16 +27,16 @@ class IhtpOverviewResponseSpec extends SpecBase {
   private val paymentDueDate = LocalDate.of(2026, 2, 2)
 
   private val report = IhtpOverviewReport(
-    fbNumber = "119000004320",
-    submissionDate = submissionDate,
-    paymentDueDate = paymentDueDate,
+    fbNumber = Some("119000004320"),
+    submissionDate = Some(submissionDate),
+    paymentDueDate = Some(paymentDueDate),
     ihtpVersion = "001",
     inheritanceTaxReference = "A123456/25A",
     paymentReference = Some("A123456/25A629671"),
     title = Some("Dr"),
-    firstForename = "Peter",
-    secondForename = Some("Michael"),
-    surname = "Smith",
+    firstForename = Some("John"),
+    secondForename = Some("M"),
+    surname = Some("Doe"),
     nino = Some("AB123456C"),
     ihtpStatus = "Not reconciled"
   )
@@ -61,9 +61,9 @@ class IhtpOverviewResponseSpec extends SpecBase {
               "inheritanceTaxReference" -> "A123456/25A",
               "paymentReference" -> "A123456/25A629671",
               "title" -> "Dr",
-              "firstForename" -> "Peter",
-              "secondForename" -> "Michael",
-              "surname" -> "Smith",
+              "firstForename" -> "John",
+              "secondForename" -> "M",
+              "surname" -> "Doe",
               "nino" -> "AB123456C",
               "ihtpStatus" -> "Not reconciled"
             )
@@ -84,9 +84,9 @@ class IhtpOverviewResponseSpec extends SpecBase {
       (json \ "success" \ "ihtpOverview" \ 0 \ "inheritanceTaxReference").as[String] mustBe "A123456/25A"
       (json \ "success" \ "ihtpOverview" \ 0 \ "paymentReference").as[String] mustBe "A123456/25A629671"
       (json \ "success" \ "ihtpOverview" \ 0 \ "title").as[String] mustBe "Dr"
-      (json \ "success" \ "ihtpOverview" \ 0 \ "firstForename").as[String] mustBe "Peter"
-      (json \ "success" \ "ihtpOverview" \ 0 \ "secondForename").as[String] mustBe "Michael"
-      (json \ "success" \ "ihtpOverview" \ 0 \ "surname").as[String] mustBe "Smith"
+      (json \ "success" \ "ihtpOverview" \ 0 \ "firstForename").as[String] mustBe "John"
+      (json \ "success" \ "ihtpOverview" \ 0 \ "secondForename").as[String] mustBe "M"
+      (json \ "success" \ "ihtpOverview" \ 0 \ "surname").as[String] mustBe "Doe"
       (json \ "success" \ "ihtpOverview" \ 0 \ "nino").as[String] mustBe "AB123456C"
       (json \ "success" \ "ihtpOverview" \ 0 \ "ihtpStatus").as[String] mustBe "Not reconciled"
     }
@@ -154,9 +154,9 @@ class IhtpOverviewResponseSpec extends SpecBase {
         "inheritanceTaxReference" -> "A123456/25A",
         "paymentReference" -> "A123456/25A629671",
         "title" -> "Dr",
-        "firstForename" -> "Peter",
-        "secondForename" -> "Michael",
-        "surname" -> "Smith",
+        "firstForename" -> "John",
+        "secondForename" -> "M",
+        "surname" -> "Doe",
         "nino" -> "AB123456C",
         "ihtpStatus" -> "Not reconciled"
       )
@@ -172,28 +172,23 @@ class IhtpOverviewResponseSpec extends SpecBase {
 
     "must handle missing optional fields when reading from json" in {
       val json = Json.obj(
-        "fbNumber" -> "119000004321",
-        "submissionDate" -> "2026-04-11T16:12:49Z",
-        "paymentDueDate" -> "2026-02-03",
-        "ihtpVersion" -> "002",
+        "ihtpVersion" -> "000",
         "inheritanceTaxReference" -> "F654321/25B",
-        "firstForename" -> "Jane",
-        "surname" -> "Doe",
         "ihtpStatus" -> "In progress"
       )
 
       json.validate[IhtpOverviewReport] mustBe JsSuccess(
         IhtpOverviewReport(
-          fbNumber = "119000004321",
-          submissionDate = Instant.parse("2026-04-11T16:12:49Z"),
-          paymentDueDate = LocalDate.of(2026, 2, 3),
-          ihtpVersion = "002",
+          fbNumber = None,
+          submissionDate = None,
+          paymentDueDate = None,
+          ihtpVersion = "000",
           inheritanceTaxReference = "F654321/25B",
           paymentReference = None,
           title = None,
-          firstForename = "Jane",
+          firstForename = None,
           secondForename = None,
-          surname = "Doe",
+          surname = None,
           nino = None,
           ihtpStatus = "In progress"
         )
@@ -221,10 +216,9 @@ class IhtpOverviewResponseSpec extends SpecBase {
         .obj(
           "submissionDate" -> "2026-04-10T16:12:49Z",
           "paymentDueDate" -> "2026-02-02",
-          "ihtpVersion" -> "001",
           "inheritanceTaxReference" -> "A123456/25A",
-          "firstForename" -> "Peter",
-          "surname" -> "Smith",
+          "firstForename" -> "John",
+          "surname" -> "Doe",
           "ihtpStatus" -> "Not reconciled"
         )
         .validate[IhtpOverviewReport] mustBe a[JsError]
@@ -238,24 +232,24 @@ class IhtpOverviewResponseSpec extends SpecBase {
           "paymentDueDate" -> "not-a-date",
           "ihtpVersion" -> "001",
           "inheritanceTaxReference" -> "A123456/25A",
-          "firstForename" -> "Peter",
-          "surname" -> "Smith",
+          "firstForename" -> "John",
+          "surname" -> "Doe",
           "ihtpStatus" -> "Not reconciled"
         )
         .validate[IhtpOverviewReport] mustBe a[JsError]
     }
 
     "must expose all case class values" in {
-      report.fbNumber mustBe "119000004320"
-      report.submissionDate mustBe submissionDate
-      report.paymentDueDate mustBe paymentDueDate
+      report.fbNumber mustBe Some("119000004320")
+      report.submissionDate mustBe Some(submissionDate)
+      report.paymentDueDate mustBe Some(paymentDueDate)
       report.ihtpVersion mustBe "001"
       report.inheritanceTaxReference mustBe "A123456/25A"
       report.paymentReference mustBe Some("A123456/25A629671")
       report.title mustBe Some("Dr")
-      report.firstForename mustBe "Peter"
-      report.secondForename mustBe Some("Michael")
-      report.surname mustBe "Smith"
+      report.firstForename mustBe Some("John")
+      report.secondForename mustBe Some("M")
+      report.surname mustBe Some("Doe")
       report.nino mustBe Some("AB123456C")
       report.ihtpStatus mustBe "Not reconciled"
       report.copy(
@@ -274,28 +268,28 @@ class IhtpOverviewResponseSpec extends SpecBase {
       ) mustBe report
       report.productArity mustBe 12
       report.productPrefix mustBe "IhtpOverviewReport"
-      (report.productIterator.toSeq must contain).allOf("119000004320", "001", "Peter", "Smith")
+      (report.productIterator.toSeq must contain).allOf(Some("119000004320"), "001", Some("John"), Some("Doe"))
       report.toString must include("IhtpOverviewReport")
     }
 
     "must format deceasedName with title and second forename" in {
-      report.deceasedName mustBe "Dr Peter Michael Smith"
+      report.deceasedName mustBe "Dr John M Doe"
     }
 
     "must format deceasedName without title" in {
-      report.copy(title = None).deceasedName mustBe "Peter Michael Smith"
+      report.copy(title = None).deceasedName mustBe "John M Doe"
     }
 
     "must format deceasedName without second forename" in {
-      report.copy(secondForename = None).deceasedName mustBe "Dr Peter Smith"
+      report.copy(secondForename = None).deceasedName mustBe "Dr John Doe"
     }
 
     "must format deceasedName with only required name fields" in {
-      report.copy(title = None, secondForename = None).deceasedName mustBe "Peter Smith"
+      report.copy(title = None, secondForename = None).deceasedName mustBe "John Doe"
     }
 
     "must not add extra spaces when optional name fields are empty strings" in {
-      report.copy(title = Some(""), secondForename = Some("")).deceasedName mustBe "Peter Smith"
+      report.copy(title = Some(""), secondForename = Some("")).deceasedName mustBe "John Doe"
     }
   }
 }
