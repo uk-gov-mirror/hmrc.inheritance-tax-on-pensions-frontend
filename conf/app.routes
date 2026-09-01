@@ -106,10 +106,10 @@ POST        /:srn/enter-name-of-beneficiary/$index<[1-2]?[0-9]>     controllers.
 GET         /:srn/change-name-of-beneficiary/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryNameController.onPageLoad(srn: Srn, mode: Mode = CheckMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryIndividual)
 POST        /:srn/change-name-of-beneficiary/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryNameController.onSubmit(srn: Srn, mode: Mode = CheckMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryIndividual)
 
-GET         /:srn/enter-name-of-beneficiary-organisation/$index<[1-2]?[0-9]>     controllers.beneficiary.BeneficiaryNameController.onPageLoad(srn: Srn, mode: Mode = NormalMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryOrganisation)
-POST        /:srn/enter-name-of-beneficiary-organisation/$index<[1-2]?[0-9]>     controllers.beneficiary.BeneficiaryNameController.onSubmit(srn: Srn, mode: Mode = NormalMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryOrganisation)
-GET         /:srn/change-name-of-beneficiary-organisation/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryNameController.onPageLoad(srn: Srn, mode: Mode = CheckMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryOrganisation)
-POST        /:srn/change-name-of-beneficiary-organisation/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryNameController.onSubmit(srn: Srn, mode: Mode = CheckMode, index: Int, journeyRole: JourneyRole = JourneyRole.BeneficiaryOrganisation)
+GET         /:srn/beneficiary-organisation-details/$index<[1-2]?[0-9]>           controllers.beneficiary.BeneficiaryOrganisationDetailsController.onPageLoad(srn: Srn, index: Int, mode: Mode = NormalMode)
+POST        /:srn/beneficiary-organisation-details/$index<[1-2]?[0-9]>           controllers.beneficiary.BeneficiaryOrganisationDetailsController.onSubmit(srn: Srn, index: Int, mode: Mode = NormalMode)
+GET         /:srn/change-beneficiary-organisation-details/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryOrganisationDetailsController.onPageLoad(srn: Srn, index: Int, mode: Mode = CheckMode)
+POST        /:srn/change-beneficiary-organisation-details/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryOrganisationDetailsController.onSubmit(srn: Srn, index: Int, mode: Mode = CheckMode)
 
 GET         /:srn/add-beneficiary                                      controllers.beneficiary.BeneficiaryListController.onPageLoad(srn: Srn)
 POST        /:srn/add-beneficiary                                      controllers.beneficiary.BeneficiaryListController.onSubmit(srn: Srn)

@@ -39,7 +39,7 @@
 
 @layout(pageTitle = title(form, viewModel.title)) {
 
-    @formHelper(action = controllers.beneficiary.routes.BeneficiaryNameController.onSubmit(srn, mode, index, journeyRole), Symbol("autoComplete") -> "off") {
+    @formHelper(action = controllers.beneficiary.routes.BeneficiaryNameController.onSubmit(srn, mode, index), Symbol("autoComplete") -> "off") {
 
         @if(form.errors.nonEmpty) {
             @govukErrorSummary(ErrorSummaryViewModel(form))

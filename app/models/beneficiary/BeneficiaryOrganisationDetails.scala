@@ -17,14 +17,12 @@
 package models.beneficiary
 
 import play.api.libs.json.{Json, OFormat}
-import models.IndividualName
 
-case class BeneficiaryDetail(
-  individual: Option[IndividualName] = None,
-  organisation: Option[BeneficiaryOrganisationDetails] = None
+case class BeneficiaryOrganisationDetails(
+  beneficiaryTrstName: String,
+  hmrcReferenceNumber: String
 )
 
-object BeneficiaryDetail {
-  implicit val BeneficiaryDetailFormat: OFormat[BeneficiaryDetail] =
-    Json.format[BeneficiaryDetail]
+object BeneficiaryOrganisationDetails {
+  implicit val format: OFormat[BeneficiaryOrganisationDetails] = Json.format[BeneficiaryOrganisationDetails]
 }

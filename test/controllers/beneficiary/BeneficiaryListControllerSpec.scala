@@ -24,7 +24,7 @@ import forms.beneficiary.BeneficiaryListFormProvider
 import viewmodels.beneficiary.BeneficiaryListItem
 import models.beneficiary.BeneficiaryType
 import models.{CheckMode, JourneyRole, NormalMode}
-import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryTypePage}
+import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryOrganisationDetailsPage, BeneficiaryTypePage}
 
 class BeneficiaryListControllerSpec extends SpecBase {
 
@@ -42,7 +42,7 @@ class BeneficiaryListControllerSpec extends SpecBase {
     BeneficiaryListItem(
       name = individualNameFormatted,
       changeUrl = routes.BeneficiaryNameController
-        .onPageLoad(srn, CheckMode, testIndex, JourneyRole.BeneficiaryIndividual)
+        .onPageLoad(srn, CheckMode, testIndex)
         .url,
       removeUrl = routes.RemoveBeneficiaryController.onPageLoad(srn, testIndex).url
     )
@@ -74,6 +74,32 @@ class BeneficiaryListControllerSpec extends SpecBase {
         status(result) mustEqual OK
         contentAsString(result) mustEqual
           view(form, srn, Seq.empty, 0)(using request, messages(application)).toString
+      }
+    }
+
+    "must display an organisation beneficiary with the correct Change link" in {
+      val userAnswers = emptyUserAnswers
+        .set(BeneficiaryTypePage(testIndex), BeneficiaryType.Organisation)
+        .success
+        .value
+        .set(BeneficiaryOrganisationDetailsPage(testIndex), beneficiaryOrganisationDetails)
+        .success
+        .value
+      val application = applicationBuilder(userAnswers = Some(userAnswers), usesSession = true).build()
+
+      running(application) {
+        val request = FakeRequest(GET, routeUrl)
+        val result = route(application, request).value
+        val view = application.injector.instanceOf[BeneficiaryListView]
+        val organisationItem = BeneficiaryListItem(
+          name = organisationName,
+          changeUrl = routes.BeneficiaryOrganisationDetailsController.onPageLoad(srn, testIndex, CheckMode).url,
+          removeUrl = routes.RemoveBeneficiaryController.onPageLoad(srn, testIndex).url
+        )
+
+        status(result) mustEqual OK
+        contentAsString(result) mustEqual
+          view(form, srn, Seq(organisationItem), 1)(using request, messages(application)).toString
       }
     }
 

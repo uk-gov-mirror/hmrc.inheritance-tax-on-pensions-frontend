@@ -18,6 +18,8 @@ package pages.beneficiary
 
 import base.SpecBase
 import play.api.libs.json.JsPath
+import models.beneficiary.BeneficiaryType
+import models.JourneyRole
 
 class BeneficiaryTypePageSpec extends SpecBase {
 
@@ -29,6 +31,32 @@ class BeneficiaryTypePageSpec extends SpecBase {
 
     "must use the correct page name" in {
       BeneficiaryTypePage(testIndex).toString mustEqual "beneficiaryType"
+    }
+
+    "must remove individual beneficiary details when Organisation is selected" in {
+      val userAnswers = emptyUserAnswers
+        .set(BeneficiaryNamePage(testIndex, JourneyRole.BeneficiaryIndividual), individualName)
+        .success
+        .value
+        .set(BeneficiaryHasNinoPage(testIndex), true)
+        .success
+        .value
+
+      val updatedAnswers = userAnswers.set(BeneficiaryTypePage(testIndex), BeneficiaryType.Organisation).success.value
+
+      updatedAnswers.get(BeneficiaryNamePage(testIndex, JourneyRole.BeneficiaryIndividual)) mustBe None
+      updatedAnswers.get(BeneficiaryHasNinoPage(testIndex)) mustBe None
+    }
+
+    "must remove organisation beneficiary details when Individual is selected" in {
+      val userAnswers = emptyUserAnswers
+        .set(BeneficiaryOrganisationDetailsPage(testIndex), beneficiaryOrganisationDetails)
+        .success
+        .value
+
+      val updatedAnswers = userAnswers.set(BeneficiaryTypePage(testIndex), BeneficiaryType.Individual).success.value
+
+      updatedAnswers.get(BeneficiaryOrganisationDetailsPage(testIndex)) mustBe None
     }
 
   }

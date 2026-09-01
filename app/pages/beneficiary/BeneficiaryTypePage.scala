@@ -19,10 +19,25 @@ package pages.beneficiary
 import pages.QuestionPage
 import play.api.libs.json.JsPath
 import models.beneficiary.BeneficiaryType
+import models.{JourneyRole, UserAnswers}
+
+import scala.util.Try
 
 case class BeneficiaryTypePage(index: Int) extends QuestionPage[BeneficiaryType] {
 
   override def path: JsPath = (JsPath \ "beneficiaries")(index) \ toString
 
   override def toString: String = "beneficiaryType"
+
+  override def cleanup(value: Option[BeneficiaryType], userAnswers: UserAnswers): Try[UserAnswers] =
+    value match {
+      case Some(BeneficiaryType.Organisation) =>
+        for {
+          withoutIndividualName <- userAnswers.remove(BeneficiaryNamePage(index, JourneyRole.BeneficiaryIndividual))
+          withoutIndividualDetails <- withoutIndividualName.remove(BeneficiaryHasNinoPage(index))
+        } yield withoutIndividualDetails
+      case Some(BeneficiaryType.Individual) =>
+        userAnswers.remove(BeneficiaryOrganisationDetailsPage(index))
+      case _ => super.cleanup(value, userAnswers)
+    }
 }

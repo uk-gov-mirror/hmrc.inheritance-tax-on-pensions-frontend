@@ -58,7 +58,7 @@ class BeneficiaryIndividualNameSummarySpec extends org.scalatest.freespec.AnyFre
       result.get.value.content mustBe HtmlContent("Mr John William Doe")
       result.get.actions.get.items.head.href mustBe
         controllers.beneficiary.routes.BeneficiaryNameController
-          .onPageLoad(srn, CheckMode, testIndex, JourneyRole.BeneficiaryIndividual)
+          .onPageLoad(srn, CheckMode, testIndex)
           .url
     }
   }

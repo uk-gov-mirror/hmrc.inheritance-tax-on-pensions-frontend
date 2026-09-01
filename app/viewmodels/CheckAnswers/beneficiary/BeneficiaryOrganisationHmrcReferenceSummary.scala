@@ -17,30 +17,26 @@
 package viewmodels.CheckAnswers.beneficiary
 
 import viewmodels.implicits._
-import play.twirl.api.HtmlFormat
-import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 import models.SchemeId.Srn
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
 import controllers.beneficiary.routes
-import models._
-import pages.beneficiary.BeneficiaryNamePage
+import models.{CheckMode, UserAnswers}
+import pages.beneficiary.BeneficiaryOrganisationDetailsPage
 import play.api.i18n.Messages
 import viewmodels.govuk.summarylist._
 
-object BeneficiaryIndividualNameSummary {
+object BeneficiaryOrganisationHmrcReferenceSummary {
 
   def row(srn: Srn, index: Int, answers: UserAnswers)(implicit messages: Messages): Option[SummaryListRow] =
-    answers.get(BeneficiaryNamePage(index, JourneyRole.BeneficiaryIndividual)).map { answer =>
+    answers.get(BeneficiaryOrganisationDetailsPage(index)).map { details =>
       SummaryListRowViewModel(
-        key = "beneficiaryIndividualName.checkYourAnswersLabel",
-        value = ValueViewModel(HtmlContent(HtmlFormat.escape(answer.displayFullNameAndTitle).toString)),
+        key = "beneficiaryOrganisationDetails.hmrcReference.checkYourAnswersLabel",
+        value = ValueViewModel(details.hmrcReferenceNumber),
         actions = Seq(
           ActionItemViewModel(
             "site.change",
-            routes.BeneficiaryNameController
-              .onPageLoad(srn, CheckMode, index)
-              .url
-          ).withVisuallyHiddenText(messages("beneficiaryIndividualName.checkYourAnswersLabel.hidden"))
+            routes.BeneficiaryOrganisationDetailsController.onPageLoad(srn, index, CheckMode).url
+          ).withVisuallyHiddenText(messages("beneficiaryOrganisationDetails.hmrcReference.change.hidden"))
         )
       )
     }

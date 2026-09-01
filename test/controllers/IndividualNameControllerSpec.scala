@@ -38,7 +38,7 @@ class IndividualNameControllerSpec extends SpecBase {
   private def userAnswersWithPrDetails(journeyRole: JourneyRole, address: Option[PrAddress]) = {
     val details = journeyRole match {
       case JourneyRole.PrOrganisation =>
-        Json.obj("organisationName" -> testOrganisationName) ++ Json.toJsObject(individualName)
+        Json.obj("organisationName" -> organisationName) ++ Json.toJsObject(individualName)
       case _ => Json.toJsObject(individualName)
     }
 

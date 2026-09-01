@@ -26,7 +26,7 @@ import controllers.actions._
 import forms.beneficiary.BeneficiaryTypeFormProvider
 import models.beneficiary.BeneficiaryType
 import models._
-import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryTypePage}
+import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryOrganisationDetailsPage, BeneficiaryTypePage}
 import play.api.i18n.MessagesApi
 import play.api.data.Form
 
@@ -93,11 +93,10 @@ class BeneficiaryTypeController @Inject() (
             routes.BeneficiaryNameController.onPageLoad(
               srn,
               NormalMode,
-              index,
-              JourneyRole.BeneficiaryIndividual
+              index
             )
-          case _ =>
-            controllers.routes.CheckYourAnswersController.onPageLoad(srn)
+          case BeneficiaryType.Organisation =>
+            routes.BeneficiaryOrganisationDetailsController.onPageLoad(srn, index, NormalMode)
         }
       case CheckMode =>
         answer match {
@@ -106,9 +105,10 @@ class BeneficiaryTypeController @Inject() (
             routes.BeneficiaryNameController.onPageLoad(
               srn,
               CheckMode,
-              index,
-              JourneyRole.BeneficiaryIndividual
+              index
             )
+          case BeneficiaryType.Organisation if userAnswers.get(BeneficiaryOrganisationDetailsPage(index)).isEmpty =>
+            routes.BeneficiaryOrganisationDetailsController.onPageLoad(srn, index, CheckMode)
           case _ =>
             controllers.routes.CheckYourAnswersController.onPageLoad(srn)
         }

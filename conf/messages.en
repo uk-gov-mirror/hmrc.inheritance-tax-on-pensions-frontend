@@ -347,6 +347,18 @@ beneficiaryIndividualName.error.surname.pattern = Enter a valid last name
 beneficiaryIndividualName.checkYourAnswersLabel = Full name of beneficiary
 beneficiaryIndividualName.checkYourAnswersLabel.hidden = full name of beneficiary
 
+beneficiaryOrganisationDetails.title = Enter the name and HMRC Reference Number of the organisation or trust
+beneficiaryOrganisationDetails.heading = Enter the name and HMRC Reference Number of the organisation or trust
+beneficiaryOrganisationDetails.name.label = Name of organisation or trust
+beneficiaryOrganisationDetails.hmrcReference.label = HMRC Reference Number
+beneficiaryOrganisationDetails.error.name.required = Enter the name of the organisation or trust
+beneficiaryOrganisationDetails.error.name.length = The name of the organisation or trust should be 160 characters or less
+beneficiaryOrganisationDetails.error.hmrcReference.required = Enter the HMRC Reference Number
+beneficiaryOrganisationDetails.name.checkYourAnswersLabel = Name of organisation or trust
+beneficiaryOrganisationDetails.name.change.hidden = the name of the organisation or trust
+beneficiaryOrganisationDetails.hmrcReference.checkYourAnswersLabel = HMRC reference number
+beneficiaryOrganisationDetails.hmrcReference.change.hidden = the HMRC reference number
+
 beneficiaryList.heading.one = You have added 1 beneficiary
 beneficiaryList.heading = You have added {0} beneficiaries
 beneficiaryList.question = Do you need to add another beneficiary?

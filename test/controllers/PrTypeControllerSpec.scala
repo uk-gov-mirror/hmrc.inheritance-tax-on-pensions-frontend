@@ -206,7 +206,7 @@ class PrTypeControllerSpec extends SpecBase {
         .copy(
           data = Json.obj(
             "prDetails" -> Json.obj(
-              "organisation" -> (Json.obj("organisationName" -> testOrganisationName)
+              "organisation" -> (Json.obj("organisationName" -> organisationName)
                 ++ Json.toJsObject(individualName))
             )
           )
@@ -241,7 +241,7 @@ class PrTypeControllerSpec extends SpecBase {
       val userAnswers = emptyUserAnswers.copy(
         data = Json.obj(
           "prDetails" -> Json.obj(
-            "organisation" -> (Json.obj("organisationName" -> testOrganisationName)
+            "organisation" -> (Json.obj("organisationName" -> organisationName)
               ++ Json.toJsObject(individualName)
               ++ Json.toJsObject(testPrAddress))
           )
@@ -329,7 +329,7 @@ class PrTypeControllerSpec extends SpecBase {
         .copy(
           data = Json.obj(
             "prDetails" -> Json.obj(
-              "organisation" -> (Json.obj("organisationName" -> testOrganisationName)
+              "organisation" -> (Json.obj("organisationName" -> organisationName)
                 ++ Json.toJsObject(individualName)
                 ++ Json.toJsObject(testPrAddress))
             )

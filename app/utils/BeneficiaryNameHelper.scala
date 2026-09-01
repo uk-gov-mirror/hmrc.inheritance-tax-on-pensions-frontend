@@ -18,7 +18,7 @@ package utils
 
 import models.beneficiary.BeneficiaryType
 import models.{IndividualName, JourneyRole, UserAnswers}
-import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryTypePage}
+import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryOrganisationDetailsPage, BeneficiaryTypePage}
 
 object BeneficiaryNameHelper {
 
@@ -26,8 +26,8 @@ object BeneficiaryNameHelper {
     userAnswers.get(BeneficiaryTypePage(index)) match {
       case Some(BeneficiaryType.Organisation) =>
         userAnswers
-          .get(BeneficiaryNamePage(index, JourneyRole.BeneficiaryOrganisation))
-          .map(displayName)
+          .get(BeneficiaryOrganisationDetailsPage(index))
+          .map(_.beneficiaryTrstName)
       case _ =>
         userAnswers
           .get(BeneficiaryNamePage(index, JourneyRole.BeneficiaryIndividual))

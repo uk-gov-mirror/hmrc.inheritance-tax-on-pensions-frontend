@@ -20,7 +20,7 @@ import org.scalatest.freespec.AnyFreeSpec
 import base.SpecBase
 import models.beneficiary.BeneficiaryType
 import models.{IndividualName, JourneyRole}
-import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryTypePage}
+import pages.beneficiary.{BeneficiaryNamePage, BeneficiaryOrganisationDetailsPage, BeneficiaryTypePage}
 
 class BeneficiaryNameHelperSpec extends AnyFreeSpec with SpecBase {
 
@@ -51,11 +51,11 @@ class BeneficiaryNameHelperSpec extends AnyFreeSpec with SpecBase {
         .set(BeneficiaryTypePage(testIndex), BeneficiaryType.Organisation)
         .success
         .value
-        .set(BeneficiaryNamePage(testIndex, JourneyRole.BeneficiaryOrganisation), name)
+        .set(BeneficiaryOrganisationDetailsPage(testIndex), beneficiaryOrganisationDetails)
         .success
         .value
 
-      BeneficiaryNameHelper.fromUserAnswers(userAnswers, testIndex) mustBe Some("John Doe")
+      BeneficiaryNameHelper.fromUserAnswers(userAnswers, testIndex) mustBe Some(organisationName)
     }
   }
 

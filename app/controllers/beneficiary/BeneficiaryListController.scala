@@ -25,7 +25,7 @@ import controllers.actions._
 import forms.beneficiary.BeneficiaryListFormProvider
 import viewmodels.beneficiary.BeneficiaryListItem
 import models.beneficiary.{Beneficiaries, BeneficiaryType}
-import models.{CheckMode, JourneyRole, UserAnswers}
+import models.{CheckMode, UserAnswers}
 import pages.beneficiary.BeneficiariesPage
 import play.api.i18n.MessagesApi
 
@@ -87,14 +87,18 @@ class BeneficiaryListController @Inject() (
     val beneficiaries = userAnswers.get(BeneficiariesPage()).getOrElse(Beneficiaries(Nil))
     val items = beneficiaries.beneficiaries.zipWithIndex.flatMap { case (beneficiary, index) =>
       BeneficiaryNameHelper.fromUserAnswers(userAnswers, index).map { name =>
-        val journeyRole = beneficiary.beneficiaryType match {
-          case BeneficiaryType.Individual => JourneyRole.BeneficiaryIndividual
-          case BeneficiaryType.Organisation => JourneyRole.BeneficiaryOrganisation
+        val changeUrl = beneficiary.beneficiaryType match {
+          case BeneficiaryType.Individual =>
+            routes.BeneficiaryNameController
+              .onPageLoad(srn, CheckMode, index)
+              .url
+          case BeneficiaryType.Organisation =>
+            routes.BeneficiaryOrganisationDetailsController.onPageLoad(srn, index, CheckMode).url
         }
 
         BeneficiaryListItem(
           name = name,
-          changeUrl = routes.BeneficiaryNameController.onPageLoad(srn, CheckMode, index, journeyRole).url,
+          changeUrl = changeUrl,
           removeUrl = routes.RemoveBeneficiaryController.onPageLoad(srn, index).url
         )
       }

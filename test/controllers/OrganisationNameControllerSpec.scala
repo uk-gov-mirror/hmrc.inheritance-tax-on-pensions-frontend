@@ -39,7 +39,7 @@ class OrganisationNameControllerSpec extends SpecBase with MockitoSugar {
   private val form = formProvider()
 
   private def userAnswersWithOrganisationDetails(address: Option[models.PrAddress]) = {
-    val details = Json.obj("organisationName" -> testOrganisationName) ++ Json.toJsObject(individualName)
+    val details = Json.obj("organisationName" -> organisationName) ++ Json.toJsObject(individualName)
 
     emptyUserAnswers.copy(
       data = Json.obj(

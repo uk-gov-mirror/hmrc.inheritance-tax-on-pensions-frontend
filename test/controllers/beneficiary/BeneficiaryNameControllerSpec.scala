@@ -145,7 +145,7 @@ class BeneficiaryNameControllerSpec extends SpecBase {
           val request =
             FakeRequest(
               POST,
-              controllers.beneficiary.routes.BeneficiaryNameController.onSubmit(srn, CheckMode, 0, journeyRole).url
+              controllers.beneficiary.routes.BeneficiaryNameController.onSubmit(srn, CheckMode, 0).url
             )
               .withFormUrlEncodedBody(validFormData*)
 
@@ -174,7 +174,7 @@ class BeneficiaryNameControllerSpec extends SpecBase {
             FakeRequest(
               POST,
               controllers.beneficiary.routes.BeneficiaryNameController
-                .onSubmit(srn, CheckMode, testIndex, journeyRole)
+                .onSubmit(srn, CheckMode, testIndex)
                 .url
             )
               .withFormUrlEncodedBody(validFormData*)

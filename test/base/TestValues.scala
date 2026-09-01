@@ -17,6 +17,7 @@
 package base
 
 import generators.Generators
+import models.beneficiary.BeneficiaryOrganisationDetails
 import models._
 
 import java.time.LocalDate
@@ -64,7 +65,10 @@ trait TestValues extends Generators {
     secondForename = Some("Middlename"),
     surname = "Lastname"
   )
-  val testOrganisationName = "Testdata Company Ltd"
+  val organisationName = "Testdata Company Ltd"
+  val beneficiaryHmrcReferenceNumber = "K1234567890"
+  val beneficiaryOrganisationDetails: BeneficiaryOrganisationDetails =
+    BeneficiaryOrganisationDetails(organisationName, beneficiaryHmrcReferenceNumber)
   val testPrAddress: PrAddress =
     PrAddress("1 ABCDE Street", None, None, Some("FGHIJ Town"), Some("AA1 1AA"), "GB")
   val individualNameFormatted: String = s"${individualName.firstForename} ${individualName.surname}"
