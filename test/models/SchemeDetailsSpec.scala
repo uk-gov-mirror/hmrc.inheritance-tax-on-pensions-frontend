@@ -95,12 +95,12 @@ class SchemeDetailsSpec extends SpecBase with ScalaCheckPropertyChecks {
       }
 
       "must write Individual establisher" in {
-        val establisher = Establisher(SensitiveString("John Middle Doe"), EstablisherKind.Individual)
+        val establisher = Establisher(SensitiveString("Firstname M Surname"), EstablisherKind.Individual)
         val json = Json.toJson(establisher)(using Establisher.writes(using NoOpCrypto))
 
-        (json \ "establisherDetails" \ "firstName").as[String] mustBe "John"
-        (json \ "establisherDetails" \ "lastName").as[String] mustBe "Doe"
-        (json \ "establisherDetails" \ "middleName").as[String] mustBe "Middle"
+        (json \ "establisherDetails" \ "firstName").as[String] mustBe "Firstname"
+        (json \ "establisherDetails" \ "lastName").as[String] mustBe "Surname"
+        (json \ "establisherDetails" \ "middleName").as[String] mustBe "M"
       }
     }
 

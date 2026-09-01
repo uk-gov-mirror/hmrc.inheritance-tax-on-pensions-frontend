@@ -33,15 +33,15 @@ class DeceasedNameHelperSpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Dr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
         .value
 
-      fromUserAnswers(userAnswers) mustBe Some("John Doe")
+      fromUserAnswers(userAnswers) mustBe Some("Firstname Surname")
     }
 
     "must return None when the deceased name has not been answered" in {
@@ -59,15 +59,15 @@ class DeceasedNameHelperSpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
         .value
 
-      DeceasedNameHelper.withName(userAnswers)("missing")(name => s"found $name") mustBe "found John Doe"
+      DeceasedNameHelper.withName(userAnswers)("missing")(name => s"found $name") mustBe "found Firstname Surname"
     }
 
     "must run the fallback block when the deceased name has not been answered" in {

@@ -46,9 +46,9 @@ class SubmissionListControllerSpec extends SpecBase {
     inheritanceTaxReference = "A123456/25A",
     paymentReference = Some("A123456/25A629671"),
     title = Some("Dr"),
-    firstForename = Some("John"),
+    firstForename = Some("Firstname"),
     secondForename = Some("M"),
-    surname = Some("Doe"),
+    surname = Some("Surname"),
     nino = None,
     ihtpStatus = "Not reconciled"
   )
@@ -181,7 +181,7 @@ class SubmissionListControllerSpec extends SpecBase {
       val reports = (1 to 16).map { index =>
         overviewReport.copy(
           fbNumber = Some(f"1190000043$index%02d"),
-          firstForename = Some(if (index % 2 == 0) "Jane" else "John"),
+          firstForename = Some(if (index % 2 == 0) "Firstnametwo" else "Firstname"),
           secondForename = Some(s"Middle$index"),
           paymentReference = Some(f"PR$index%09d")
         )

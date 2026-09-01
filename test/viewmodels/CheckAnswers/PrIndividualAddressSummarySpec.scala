@@ -37,11 +37,11 @@ class PrIndividualAddressSummarySpec extends SpecBase {
     "must return a row when data is present" in {
 
       val address = PrAddress(
-        addressLine1 = "33 Fake Street",
-        addressLine2 = Some("Fake Area"),
-        addressLine3 = Some("Fake County"),
-        addressLine4 = Some("Fakeville"),
-        ukPostcode = Some("ZZ1 1ZZ"),
+        addressLine1 = "33 AB Street",
+        addressLine2 = Some("AB Area"),
+        addressLine3 = Some("AB County"),
+        addressLine4 = Some("ABville"),
+        ukPostcode = Some("AA1 1AA"),
         country = "GB"
       )
 
@@ -58,7 +58,7 @@ class PrIndividualAddressSummarySpec extends SpecBase {
       result mustBe defined
       result.value.key.content mustBe Text(messages("prIndividualAddress.checkYourAnswersLabel"))
       result.value.value.content mustBe HtmlContent(
-        "33 Fake Street<br>Fake Area<br>Fake County<br>Fakeville<br>ZZ1 1ZZ"
+        "33 AB Street<br>AB Area<br>AB County<br>ABville<br>AA1 1AA"
       )
       result.value.actions.value.items.head.href mustBe
         controllers.routes.ChangePrAddressController.onPageLoad(srn, JourneyRole.PrIndividual).url
@@ -67,7 +67,7 @@ class PrIndividualAddressSummarySpec extends SpecBase {
     "must show only address line 1 when the optional address fields are absent" in {
 
       val address = PrAddress(
-        addressLine1 = "33 Fake Street",
+        addressLine1 = "33 AB Street",
         addressLine2 = None,
         addressLine3 = None,
         addressLine4 = None,
@@ -86,7 +86,7 @@ class PrIndividualAddressSummarySpec extends SpecBase {
       val result = PrIndividualAddressSummary.row(srn, userAnswers)
 
       result mustBe defined
-      result.value.value.content mustBe HtmlContent("33 Fake Street")
+      result.value.value.content mustBe HtmlContent("33 AB Street")
     }
 
   }

@@ -120,7 +120,7 @@ class AddressLookupFrontendConnectorSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq("33 Fake Street"),
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )

@@ -26,9 +26,9 @@ class BeneficiaryNameHelperSpec extends AnyFreeSpec with SpecBase {
 
   private val name = IndividualName(
     title = Some("Mr"),
-    firstForename = "John",
-    secondForename = Some("William"),
-    surname = "Doe"
+    firstForename = "Firstname",
+    secondForename = Some("Middlename"),
+    surname = "Surname"
   )
 
   "fromUserAnswers" - {
@@ -39,7 +39,7 @@ class BeneficiaryNameHelperSpec extends AnyFreeSpec with SpecBase {
         .success
         .value
 
-      BeneficiaryNameHelper.fromUserAnswers(userAnswers, testIndex) mustBe Some("John Doe")
+      BeneficiaryNameHelper.fromUserAnswers(userAnswers, testIndex) mustBe Some("Firstname Surname")
     }
 
     "must return None when the beneficiary name has not been answered" in {
@@ -68,7 +68,7 @@ class BeneficiaryNameHelperSpec extends AnyFreeSpec with SpecBase {
         .value
 
       BeneficiaryNameHelper.withName(userAnswers, testIndex)("missing")(name => s"found $name") mustBe
-        "found John Doe"
+        "found Firstname Surname"
     }
 
     "must run the fallback block when the beneficiary name has not been answered" in {

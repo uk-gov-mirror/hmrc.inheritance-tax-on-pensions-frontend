@@ -33,7 +33,7 @@ import scala.concurrent.Future
 class BeneficiaryHasNinoControllerSpec extends SpecBase {
 
   private val form = new BeneficiaryHasNinoFormProvider()()
-  private val beneficiaryName = IndividualName(Some("Mr"), "John", Some("William"), "Doe")
+  private val beneficiaryName = IndividualName(Some("Mr"), "Firstname", Some("Middlename"), "Surname")
 
   private lazy val beneficiaryHasNinoRoute: String =
     controllers.beneficiary.routes.BeneficiaryHasNinoController.onPageLoad(srn, testIndex, NormalMode).url
@@ -58,7 +58,7 @@ class BeneficiaryHasNinoControllerSpec extends SpecBase {
 
         status(result) mustEqual OK
         contentAsString(result) mustEqual
-          view(form, srn, testIndex, NormalMode, "John Doe")(using request, messages(application)).toString
+          view(form, srn, testIndex, NormalMode, "Firstname Surname")(using request, messages(application)).toString
       }
     }
 
@@ -73,7 +73,7 @@ class BeneficiaryHasNinoControllerSpec extends SpecBase {
 
         status(result) mustEqual OK
         contentAsString(result) mustEqual
-          view(form.fill(true), srn, testIndex, NormalMode, "John Doe")(using
+          view(form.fill(true), srn, testIndex, NormalMode, "Firstname Surname")(using
             request,
             messages(application)
           ).toString
@@ -134,7 +134,10 @@ class BeneficiaryHasNinoControllerSpec extends SpecBase {
 
         status(result) mustEqual BAD_REQUEST
         contentAsString(result) mustEqual
-          view(boundForm, srn, testIndex, NormalMode, "John Doe")(using request, messages(application)).toString
+          view(boundForm, srn, testIndex, NormalMode, "Firstname Surname")(using
+            request,
+            messages(application)
+          ).toString
       }
     }
 

@@ -48,9 +48,9 @@ class DidPrSubmitControllerSpec extends SpecBase with MockitoSugar {
 
   private val organisationPrName = IndividualName(
     title = Some("Mrs"),
-    firstForename = "Sarah",
-    secondForename = Some("Jane"),
-    surname = "Wilson"
+    firstForename = "Firstnamethree",
+    secondForename = Some("Middlenametwo"),
+    surname = "Surnametwo"
   )
 
   val userAnswersWithOrganisationPrName: UserAnswers = emptyUserAnswers
@@ -91,7 +91,7 @@ class DidPrSubmitControllerSpec extends SpecBase with MockitoSugar {
         val view = application.injector.instanceOf[DidPrSubmitView]
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form, srn, NormalMode, "Sarah Wilson")(using
+        contentAsString(result) mustEqual view(form, srn, NormalMode, "Firstnamethree Surnametwo")(using
           request,
           messages(application)
         ).toString

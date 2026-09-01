@@ -34,7 +34,7 @@ class PrOrganisationCountrySummarySpec extends SpecBase {
     }
 
     "must show the country name and link to the address lookup journey" in {
-      val address = PrAddress("1 Street Road", None, None, None, Some("NE1 1EH"), "GB")
+      val address = PrAddress("1 Street Road", None, None, None, Some("AA1 1AA"), "GB")
       val userAnswers = emptyUserAnswers.copy(
         data = Json.obj(
           "prDetails" -> Json.obj(

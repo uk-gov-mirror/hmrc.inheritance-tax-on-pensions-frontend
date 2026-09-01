@@ -107,9 +107,9 @@ class ReportSubmissionServiceSpec extends SpecBase {
         organisationName = None,
         individualDetails = Some(
           SensitiveIndividualDetails(
-            SensitiveString("John"),
-            Some(SensitiveString("William")),
-            SensitiveString("Doe")
+            SensitiveString("Firstname"),
+            Some(SensitiveString("Middlename")),
+            SensitiveString("Surname")
           )
         )
       )
@@ -126,7 +126,7 @@ class ReportSubmissionServiceSpec extends SpecBase {
         verify(mockConnector).submitReport(
           any(),
           any(),
-          argThat(name => name == "John William Doe"),
+          argThat(name => name == "Firstname Middlename Surname"),
           any(),
           any(),
           any()

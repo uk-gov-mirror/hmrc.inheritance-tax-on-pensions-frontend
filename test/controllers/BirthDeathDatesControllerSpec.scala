@@ -42,9 +42,9 @@ class BirthDeathDatesControllerSpec extends SpecBase with MockitoSugar {
   private def form = formProvider()
   private val nameOfDeceased = IndividualName(
     title = Some("Mr"),
-    firstForename = "John",
-    secondForename = Some("William"),
-    surname = "Doe"
+    firstForename = "Firstname",
+    secondForename = Some("Middlename"),
+    surname = "Surname"
   )
   private val deceasedName: String = s"${nameOfDeceased.firstForename} ${nameOfDeceased.surname}"
 

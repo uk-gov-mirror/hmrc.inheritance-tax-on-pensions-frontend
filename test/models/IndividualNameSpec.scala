@@ -27,9 +27,9 @@ class IndividualNameSpec extends SpecBase {
 
       val json = Json.obj(
         "title" -> "Mr",
-        "firstForename" -> "John",
-        "secondForename" -> "William",
-        "surname" -> "Doe"
+        "firstForename" -> "Firstname",
+        "secondForename" -> "Middlename",
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -37,9 +37,9 @@ class IndividualNameSpec extends SpecBase {
       result mustBe JsSuccess(
         IndividualName(
           title = Some("Mr"),
-          firstForename = "John",
-          secondForename = Some("William"),
-          surname = "Doe"
+          firstForename = "Firstname",
+          secondForename = Some("Middlename"),
+          surname = "Surname"
         )
       )
     }
@@ -48,24 +48,24 @@ class IndividualNameSpec extends SpecBase {
 
       val individualName = IndividualName(
         title = Some("Mr"),
-        firstForename = "John",
-        secondForename = Some("William"),
-        surname = "Doe"
+        firstForename = "Firstname",
+        secondForename = Some("Middlename"),
+        surname = "Surname"
       )
 
       val json = Json.toJson(individualName)
 
       (json \ "title").as[String] mustBe "Mr"
-      (json \ "firstForename").as[String] mustBe "John"
-      (json \ "secondForename").as[String] mustBe "William"
-      (json \ "surname").as[String] mustBe "Doe"
+      (json \ "firstForename").as[String] mustBe "Firstname"
+      (json \ "secondForename").as[String] mustBe "Middlename"
+      (json \ "surname").as[String] mustBe "Surname"
     }
 
     "must handle missing optional fields when reading from json" in {
 
       val json = Json.obj(
-        "firstForename" -> "John",
-        "surname" -> "Doe"
+        "firstForename" -> "Firstname",
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -73,9 +73,9 @@ class IndividualNameSpec extends SpecBase {
       result mustBe JsSuccess(
         IndividualName(
           title = None,
-          firstForename = "John",
+          firstForename = "Firstname",
           secondForename = None,
-          surname = "Doe"
+          surname = "Surname"
         )
       )
     }
@@ -84,7 +84,7 @@ class IndividualNameSpec extends SpecBase {
 
       val json = Json.obj(
         "title" -> "Mr",
-        "surname" -> "Doe"
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -96,7 +96,7 @@ class IndividualNameSpec extends SpecBase {
 
       val json = Json.obj(
         "title" -> "Mr",
-        "firstForename" -> "John"
+        "firstForename" -> "Firstname"
       )
 
       val result = json.validate[IndividualName]
@@ -109,7 +109,7 @@ class IndividualNameSpec extends SpecBase {
       val json = Json.obj(
         "title" -> "Mr",
         "firstForename" -> 123,
-        "surname" -> "Doe"
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -121,7 +121,7 @@ class IndividualNameSpec extends SpecBase {
 
       val json = Json.obj(
         "title" -> "Mr",
-        "firstForename" -> "John",
+        "firstForename" -> "Firstname",
         "surname" -> 123
       )
 
@@ -134,8 +134,8 @@ class IndividualNameSpec extends SpecBase {
 
       val json = Json.obj(
         "title" -> "",
-        "firstForename" -> "John",
-        "surname" -> "Doe"
+        "firstForename" -> "Firstname",
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -143,9 +143,9 @@ class IndividualNameSpec extends SpecBase {
       result mustBe JsSuccess(
         IndividualName(
           title = Some(""),
-          firstForename = "John",
+          firstForename = "Firstname",
           secondForename = None,
-          surname = "Doe"
+          surname = "Surname"
         )
       )
     }
@@ -153,9 +153,9 @@ class IndividualNameSpec extends SpecBase {
     "must handle empty string for optional secondForename" in {
 
       val json = Json.obj(
-        "firstForename" -> "John",
+        "firstForename" -> "Firstname",
         "secondForename" -> "",
-        "surname" -> "Doe"
+        "surname" -> "Surname"
       )
 
       val result = json.validate[IndividualName]
@@ -163,9 +163,9 @@ class IndividualNameSpec extends SpecBase {
       result mustBe JsSuccess(
         IndividualName(
           title = None,
-          firstForename = "John",
+          firstForename = "Firstname",
           secondForename = Some(""),
-          surname = "Doe"
+          surname = "Surname"
         )
       )
     }
@@ -174,15 +174,15 @@ class IndividualNameSpec extends SpecBase {
 
       val individualName = IndividualName(
         title = None,
-        firstForename = "John",
+        firstForename = "Firstname",
         secondForename = None,
-        surname = "Doe"
+        surname = "Surname"
       )
 
       val json = Json.toJson(individualName)
 
-      (json \ "firstForename").as[String] mustBe "John"
-      (json \ "surname").as[String] mustBe "Doe"
+      (json \ "firstForename").as[String] mustBe "Firstname"
+      (json \ "surname").as[String] mustBe "Surname"
       (json \ "title").toOption mustBe None
       (json \ "secondForename").toOption mustBe None
     }

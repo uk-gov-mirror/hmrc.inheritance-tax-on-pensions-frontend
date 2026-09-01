@@ -29,8 +29,8 @@ class AlfAddressDataSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = Some("Organisation Name"),
-          lines = Seq("33 Fake Street", "Fake Area"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street", "AB Area"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom"),
           poBox = Some("16651")
@@ -41,8 +41,8 @@ class AlfAddressDataSpec extends SpecBase {
 
       (json \ "id").as[String] mustBe "GB123"
       (json \ "address" \ "organisation").as[String] mustBe "Organisation Name"
-      (json \ "address" \ "lines").as[Seq[String]] mustBe Seq("33 Fake Street", "Fake Area")
-      (json \ "address" \ "town").as[String] mustBe "Fakeville"
+      (json \ "address" \ "lines").as[Seq[String]] mustBe Seq("33 AB Street", "AB Area")
+      (json \ "address" \ "town").as[String] mustBe "ABville"
       (json \ "address" \ "postcode").as[String] mustBe "ZZ1 1ZZ"
       (json \ "address" \ "country" \ "code").as[String] mustBe "GB"
       (json \ "address" \ "country" \ "name").as[String] mustBe "United Kingdom"

@@ -37,12 +37,12 @@ class EncryptedFormatsSpec extends SpecBase {
       )
 
       val encryptedFormats = new EncryptedFormats(config)
-      val encrypted = encryptedFormats.crypto.encrypt(PlainText("Doe"))
+      val encrypted = encryptedFormats.crypto.encrypt(PlainText("Surname"))
 
-      encrypted.value must not be "Doe"
+      encrypted.value must not be "Surname"
       encrypted.value must not be empty
 
-      encryptedFormats.crypto.decrypt(encrypted).value mustBe "Doe"
+      encryptedFormats.crypto.decrypt(encrypted).value mustBe "Surname"
     }
 
     "must create NoOpCrypto when encryption is disabled" in {
@@ -69,31 +69,31 @@ class EncryptedFormatsSpec extends SpecBase {
   "NoOpCrypto" - {
 
     "must pass through values unchanged on encrypt" in {
-      val plainText = PlainText("john doe")
+      val plainText = PlainText("firstname surname")
       val encrypted = NoOpCrypto.encrypt(plainText)
 
-      encrypted.value mustBe "john doe"
+      encrypted.value mustBe "firstname surname"
     }
 
     "must pass through values unchanged on decrypt" in {
-      val crypted = uk.gov.hmrc.crypto.Crypted("john doe")
+      val crypted = uk.gov.hmrc.crypto.Crypted("firstname surname")
       val decrypted = NoOpCrypto.decrypt(crypted)
 
-      decrypted.value mustBe "john doe"
+      decrypted.value mustBe "firstname surname"
     }
 
     "must handle decryptAsBytes" in {
-      val crypted = uk.gov.hmrc.crypto.Crypted("Doe")
+      val crypted = uk.gov.hmrc.crypto.Crypted("Surname")
       val bytes = NoOpCrypto.decryptAsBytes(crypted)
 
-      new String(bytes.value) mustBe "Doe"
+      new String(bytes.value) mustBe "Surname"
     }
 
     "must pass through values unchanged on encrypt with PlainBytes" in {
-      val plainBytes = uk.gov.hmrc.crypto.PlainBytes("john doe".getBytes)
+      val plainBytes = uk.gov.hmrc.crypto.PlainBytes("firstname surname".getBytes)
       val encrypted = NoOpCrypto.encrypt(plainBytes)
 
-      encrypted.value mustBe "john doe"
+      encrypted.value mustBe "firstname surname"
     }
   }
 }

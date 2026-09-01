@@ -50,9 +50,9 @@ class ChangePrAddressControllerSpec extends SpecBase {
         "prDetails" -> Json.obj(
           "individual" -> (Json.toJsObject(address) ++ Json.obj(
             "title" -> "Mrs",
-            "firstForename" -> "Sarah",
-            "secondForename" -> "Jane",
-            "surname" -> "Wilson"
+            "firstForename" -> "Firstnamethree",
+            "secondForename" -> "Middlenametwo",
+            "surname" -> "Surnametwo"
           ))
         )
       )
@@ -64,16 +64,16 @@ class ChangePrAddressControllerSpec extends SpecBase {
         "organisation" -> (Json.toJsObject(address) ++ Json.obj(
           "organisationName" -> "Standard Pension",
           "title" -> "Mrs",
-          "firstForename" -> "Sarah",
-          "secondForename" -> "Jane",
-          "surname" -> "Wilson"
+          "firstForename" -> "Firstnamethree",
+          "secondForename" -> "Middlenametwo",
+          "surname" -> "Surnametwo"
         ))
       )
     )
   )
 
   private val roleCases = Seq(
-    (JourneyRole.PrIndividual, individualAnswers, "Sarah Wilson"),
+    (JourneyRole.PrIndividual, individualAnswers, "Firstnamethree Surnametwo"),
     (JourneyRole.PrOrganisation, organisationAnswers, "Standard Pension")
   )
 
@@ -143,7 +143,7 @@ class ChangePrAddressControllerSpec extends SpecBase {
           journeyRole match {
             case JourneyRole.PrIndividual =>
               updatedPrDetails.as[IndividualName] mustBe
-                IndividualName(Some("Mrs"), "Sarah", Some("Jane"), "Wilson")
+                IndividualName(Some("Mrs"), "Firstnamethree", Some("Middlenametwo"), "Surnametwo")
             case JourneyRole.PrOrganisation =>
               updatedPrDetails.value("organisationName").as[String] mustBe "Standard Pension"
             case _ => fail("Unexpected journey role in test")
@@ -204,7 +204,7 @@ class ChangePrAddressControllerSpec extends SpecBase {
       val userAnswers = emptyUserAnswers
         .set(
           IndividualNamePage(JourneyRole.PrIndividual),
-          IndividualName(None, "Sarah", None, "Wilson")
+          IndividualName(None, "Firstnamethree", None, "Surnametwo")
         )
         .success
         .value

@@ -308,9 +308,9 @@ class IndividualNameControllerSpec extends SpecBase {
           "prDetails" -> Json.obj(
             "individual" -> Json.obj(
               "title" -> "Mr",
-              "firstForename" -> "John",
-              "secondForename" -> "William",
-              "surname" -> "Doe",
+              "firstForename" -> "Firstname",
+              "secondForename" -> "Middlename",
+              "surname" -> "Surname",
               "addressLine1" -> "1 ABCDE Street",
               "addressLine2" -> "FGHIJ Town",
               "ukPostcode" -> "ZZ99 1AA",
@@ -322,9 +322,9 @@ class IndividualNameControllerSpec extends SpecBase {
 
       val updatedName = IndividualName(
         title = Some("Dr"),
-        firstForename = "Jane",
+        firstForename = "Firstnametwo",
         secondForename = None,
-        surname = "Doe"
+        surname = "Surname"
       )
 
       val application = applicationBuilder(userAnswers = Some(existingAnswers), usesSession = true).build()
@@ -335,9 +335,9 @@ class IndividualNameControllerSpec extends SpecBase {
         val result = controller.addIndividualName(existingAnswers, JourneyRole.PrIndividual, updatedName).success.value
 
         (result.data \ "prDetails" \ "individual" \ "title").as[String] mustEqual "Dr"
-        (result.data \ "prDetails" \ "individual" \ "firstForename").as[String] mustEqual "Jane"
+        (result.data \ "prDetails" \ "individual" \ "firstForename").as[String] mustEqual "Firstnametwo"
         (result.data \ "prDetails" \ "individual" \ "secondForename").asOpt[String] mustBe None
-        (result.data \ "prDetails" \ "individual" \ "surname").as[String] mustEqual "Doe"
+        (result.data \ "prDetails" \ "individual" \ "surname").as[String] mustEqual "Surname"
         (result.data \ "prDetails" \ "individual" \ "addressLine1").as[String] mustEqual "1 ABCDE Street"
         (result.data \ "prDetails" \ "individual" \ "addressLine2").as[String] mustEqual "FGHIJ Town"
         (result.data \ "prDetails" \ "individual" \ "ukPostcode").as[String] mustEqual "ZZ99 1AA"
@@ -356,9 +356,9 @@ class IndividualNameControllerSpec extends SpecBase {
             "organisation" -> Json.obj(
               "organisationName" -> "Standard Pension",
               "title" -> "Mr",
-              "firstForename" -> "John",
-              "secondForename" -> "William",
-              "surname" -> "Doe"
+              "firstForename" -> "Firstname",
+              "secondForename" -> "Middlename",
+              "surname" -> "Surname"
             )
           )
         )
@@ -366,9 +366,9 @@ class IndividualNameControllerSpec extends SpecBase {
 
       val updatedName = IndividualName(
         title = Some("Dr"),
-        firstForename = "Jane",
+        firstForename = "Firstnametwo",
         secondForename = None,
-        surname = "Doe"
+        surname = "Surname"
       )
 
       val application = applicationBuilder(userAnswers = Some(existingAnswers), usesSession = true).build()
@@ -381,9 +381,9 @@ class IndividualNameControllerSpec extends SpecBase {
 
         (result.data \ "prDetails" \ "organisation" \ "organisationName").as[String] mustEqual "Standard Pension"
         (result.data \ "prDetails" \ "organisation" \ "title").as[String] mustEqual "Dr"
-        (result.data \ "prDetails" \ "organisation" \ "firstForename").as[String] mustEqual "Jane"
+        (result.data \ "prDetails" \ "organisation" \ "firstForename").as[String] mustEqual "Firstnametwo"
         (result.data \ "prDetails" \ "organisation" \ "secondForename").asOpt[String] mustBe None
-        (result.data \ "prDetails" \ "organisation" \ "surname").as[String] mustEqual "Doe"
+        (result.data \ "prDetails" \ "organisation" \ "surname").as[String] mustEqual "Surname"
       }
     }
 
@@ -391,9 +391,9 @@ class IndividualNameControllerSpec extends SpecBase {
 
   private val validFormData = Seq(
     "title" -> "Mr",
-    "firstForename" -> "John",
-    "secondForename" -> "William",
-    "surname" -> "Doe"
+    "firstForename" -> "Firstname",
+    "secondForename" -> "Middlename",
+    "surname" -> "Surname"
   )
 
   private val invalidFormData = Seq(

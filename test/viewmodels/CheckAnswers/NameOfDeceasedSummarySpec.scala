@@ -46,9 +46,9 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
@@ -58,7 +58,7 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
 
       result mustBe defined
       result.get.key.content mustBe Text(messages("nameOfDeceased.checkYourAnswersLabel"))
-      result.get.value.content mustBe HtmlContent("Mr John William Doe")
+      result.get.value.content mustBe HtmlContent("Mr Firstname Middlename Surname")
       result.get.actions.get.items.head.href mustBe
         controllers.routes.IndividualNameController.onPageLoad(srn, CheckMode, JourneyRole.Deceased).url
     }
@@ -70,9 +70,9 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
@@ -81,7 +81,7 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
       val result = NameOfDeceasedSummary.row(srn, userAnswers)
 
       result mustBe defined
-      result.get.value.content mustBe HtmlContent("Mr John William Doe")
+      result.get.value.content mustBe HtmlContent("Mr Firstname Middlename Surname")
     }
 
     "must format full name correctly without title" in {
@@ -91,9 +91,9 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = None,
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
@@ -102,7 +102,7 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
       val result = NameOfDeceasedSummary.row(srn, userAnswers)
 
       result mustBe defined
-      result.get.value.content mustBe HtmlContent("John William Doe")
+      result.get.value.content mustBe HtmlContent("Firstname Middlename Surname")
     }
 
     "must format full name correctly without middle names" in {
@@ -112,9 +112,9 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
+            firstForename = "Firstname",
             secondForename = None,
-            surname = "Doe"
+            surname = "Surname"
           )
         )
         .success
@@ -123,7 +123,7 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
       val result = NameOfDeceasedSummary.row(srn, userAnswers)
 
       result mustBe defined
-      result.get.value.content mustBe HtmlContent("Mr John Doe")
+      result.get.value.content mustBe HtmlContent("Mr Firstname Surname")
     }
 
     "must format full name correctly with only required fields" in {
@@ -133,9 +133,9 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = None,
-            firstForename = "John",
+            firstForename = "Firstname",
             secondForename = None,
-            surname = "Doe"
+            surname = "Surname"
           )
         )
         .success
@@ -144,7 +144,7 @@ class NameOfDeceasedSummarySpec extends AnyFreeSpec with SpecBase {
       val result = NameOfDeceasedSummary.row(srn, userAnswers)
 
       result mustBe defined
-      result.get.value.content mustBe HtmlContent("John Doe")
+      result.get.value.content mustBe HtmlContent("Firstname Surname")
     }
   }
 }

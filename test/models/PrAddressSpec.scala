@@ -29,18 +29,18 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("33 Fake Street", "Fake Area", "Fake County"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street", "AB Area", "AB County"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
       )
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
-        addressLine1 = "33 Fake Street",
-        addressLine2 = Some("Fake Area"),
-        addressLine3 = Some("Fake County"),
-        addressLine4 = Some("Fakeville"),
+        addressLine1 = "33 AB Street",
+        addressLine2 = Some("AB Area"),
+        addressLine3 = Some("AB County"),
+        addressLine4 = Some("ABville"),
         ukPostcode = Some("ZZ1 1ZZ"),
         country = "GB"
       )
@@ -52,16 +52,16 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("33 Fake Street"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
       )
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
-        addressLine1 = "33 Fake Street",
-        addressLine2 = Some("Fakeville"),
+        addressLine1 = "33 AB Street",
+        addressLine2 = Some("ABville"),
         addressLine3 = None,
         addressLine4 = None,
         ukPostcode = Some("ZZ1 1ZZ"),
@@ -75,8 +75,8 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("33 Fake Street", "Fake Area"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street", "AB Area"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom"),
           poBox = Some("999")
@@ -85,9 +85,9 @@ class PrAddressSpec extends SpecBase {
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
         addressLine1 = "PO Box 999",
-        addressLine2 = Some("33 Fake Street"),
-        addressLine3 = Some("Fake Area"),
-        addressLine4 = Some("Fakeville"),
+        addressLine2 = Some("33 AB Street"),
+        addressLine3 = Some("AB Area"),
+        addressLine4 = Some("ABville"),
         ukPostcode = Some("ZZ1 1ZZ"),
         country = "GB"
       )
@@ -99,8 +99,8 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("PO Box 999", "Fake Area"),
-          town = Some("Fakeville"),
+          lines = Seq("PO Box 999", "AB Area"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom"),
           poBox = Some("999")
@@ -109,9 +109,9 @@ class PrAddressSpec extends SpecBase {
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
         addressLine1 = "PO Box 999",
-        addressLine2 = Some("Fake Area"),
+        addressLine2 = Some("AB Area"),
         addressLine3 = None,
-        addressLine4 = Some("Fakeville"),
+        addressLine4 = Some("ABville"),
         ukPostcode = Some("ZZ1 1ZZ"),
         country = "GB"
       )
@@ -124,7 +124,7 @@ class PrAddressSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq.empty,
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom"),
           poBox = Some("PO Box 999")
@@ -133,7 +133,7 @@ class PrAddressSpec extends SpecBase {
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
         addressLine1 = "PO Box 999",
-        addressLine2 = Some("Fakeville"),
+        addressLine2 = Some("ABville"),
         addressLine3 = None,
         addressLine4 = None,
         ukPostcode = Some("ZZ1 1ZZ"),
@@ -148,7 +148,7 @@ class PrAddressSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq("PO Box 999"),
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
@@ -156,7 +156,7 @@ class PrAddressSpec extends SpecBase {
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
         addressLine1 = "PO Box 999",
-        addressLine2 = Some("Fakeville"),
+        addressLine2 = Some("ABville"),
         addressLine3 = None,
         addressLine4 = None,
         ukPostcode = Some("ZZ1 1ZZ"),
@@ -170,16 +170,16 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("33 Fake Street", "Fakeville"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street", "ABville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
       )
 
       PrAddress.fromAlfAddressData(addressData) mustBe PrAddress(
-        addressLine1 = "33 Fake Street",
-        addressLine2 = Some("Fakeville"),
+        addressLine1 = "33 AB Street",
+        addressLine2 = Some("ABville"),
         addressLine3 = None,
         addressLine4 = None,
         ukPostcode = Some("ZZ1 1ZZ"),
@@ -196,8 +196,8 @@ class PrAddressSpec extends SpecBase {
         id = Some("GB123"),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("33 Fake Street"),
-          town = Some("Fakeville"),
+          lines = Seq("33 AB Street"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
@@ -213,7 +213,7 @@ class PrAddressSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq.empty,
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom"),
           poBox = Some("999")
@@ -230,7 +230,7 @@ class PrAddressSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq("  "),
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )

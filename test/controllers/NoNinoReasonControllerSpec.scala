@@ -38,9 +38,9 @@ class NoNinoReasonControllerSpec extends SpecBase with MockitoSugar {
 
   private val nameOfDeceased: IndividualName = IndividualName(
     title = Some("Mr"),
-    firstForename = "John",
-    secondForename = Some("William"),
-    surname = "Doe"
+    firstForename = "Firstname",
+    secondForename = Some("Middlename"),
+    surname = "Surname"
   )
   private val deceasedName: String = s"${nameOfDeceased.firstForename} ${nameOfDeceased.surname}"
   private val userAnswersWithDeceasedName: UserAnswers = emptyUserAnswers

@@ -42,7 +42,7 @@ class PrTypePageSpec extends SpecBase {
 
     "must remove individual PR details when Organisation is selected" in {
       val userAnswers = emptyUserAnswers
-        .set(IndividualNamePage(JourneyRole.PrIndividual), IndividualName(Some("Mr"), "John", None, "Doe"))
+        .set(IndividualNamePage(JourneyRole.PrIndividual), IndividualName(Some("Mr"), "Firstname", None, "Surname"))
         .success
         .value
 
@@ -58,8 +58,8 @@ class PrTypePageSpec extends SpecBase {
             "organisation" -> Json.obj(
               "organisationName" -> "Test Organisation",
               "title" -> "Mr",
-              "firstForename" -> "John",
-              "surname" -> "Doe"
+              "firstForename" -> "Firstname",
+              "surname" -> "Surname"
             )
           )
         )

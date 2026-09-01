@@ -43,9 +43,9 @@ class PrIndividualNameSummarySpec extends org.scalatest.freespec.AnyFreeSpec wit
           IndividualNamePage(JourneyRole.PrIndividual),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
@@ -55,7 +55,7 @@ class PrIndividualNameSummarySpec extends org.scalatest.freespec.AnyFreeSpec wit
 
       result mustBe defined
       result.get.key.content mustBe Text(messages("prIndividualName.checkYourAnswersLabel"))
-      result.get.value.content mustBe HtmlContent("Mr John William Doe")
+      result.get.value.content mustBe HtmlContent("Mr Firstname Middlename Surname")
       result.get.actions.get.items.head.href mustBe
         controllers.routes.IndividualNameController.onPageLoad(srn, CheckMode, JourneyRole.PrIndividual).url
     }

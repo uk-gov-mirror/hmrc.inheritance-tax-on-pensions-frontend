@@ -9,7 +9,7 @@ ThisBuild / scalaVersion := "3.7.1"
 
 lazy val microservice = (project in file("."))
   .enablePlugins(PlayScala, SbtDistributablesPlugin)
-  .disablePlugins(JUnitXmlReportPlugin) //Required to prevent https://github.com/scalatest/scalatest/issues/1427
+  .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(inConfig(Test)(testSettings): _*)
   .settings(ThisBuild / useSuperShell := false)
   .settings(
@@ -20,7 +20,7 @@ lazy val microservice = (project in file("."))
       "models._",
       "models.SchemeId.*",
       "uk.gov.hmrc.play.bootstrap.binders.RedirectUrl",
-      "config.Binders.*",
+      "config.Binders.*"
     ),
     TwirlKeys.templateImports ++= Seq(
       "play.twirl.api.HtmlFormat",
@@ -41,7 +41,8 @@ lazy val microservice = (project in file("."))
       "-Wconf:msg=unused import&src=.*views/.*:s",
       "-Wconf:msg=unused&src=.*Routes\\.scala:s",
       "-Wconf:msg=match may not be exhaustive.&src=.*routes:s",
-      "-Xmax-inlines", "100",
+      "-Xmax-inlines",
+      "100",
       "-language:implicitConversions"
     ),
     libraryDependencies ++= AppDependencies(),
@@ -50,8 +51,8 @@ lazy val microservice = (project in file("."))
     Assets / pipelineStages := Seq(concat),
     scalafmtOnCompile := true,
     scalafixOnCompile := true
-  ).settings(CodeCoverageSettings.settings: _*)
-
+  )
+  .settings(CodeCoverageSettings.settings: _*)
 
 lazy val testSettings: Seq[Def.Setting[_]] = Seq(
   fork := true,
@@ -65,4 +66,5 @@ lazy val it =
     .settings(
       scalacOptions ++= Seq(
         "-Wconf:msg=Flag.*repeatedly:s"
-      ))
+      )
+    )

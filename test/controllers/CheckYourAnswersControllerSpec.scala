@@ -47,9 +47,9 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get
@@ -65,9 +65,9 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.PrIndividual),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get
@@ -113,15 +113,15 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get
         .set(HasNinoPage, false)
         .get
-        .set(NoNinoReasonPage, "John Doe reason")
+        .set(NoNinoReasonPage, "Firstname Surname reason")
         .get
         .set(BirthDeathDatesPage, BirthDeathDates(testDateOfBirth, testDateOfDeath))
         .get
@@ -131,9 +131,9 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.PrIndividual),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get
@@ -210,11 +210,11 @@ class CheckYourAnswersControllerSpec extends SpecBase {
             "prDetails" -> Json.obj(
               "individual" -> Json.obj(
                 "title" -> "Ms",
-                "firstForename" -> "Jane",
-                "secondForename" -> "Ann",
-                "surname" -> "Doe",
+                "firstForename" -> "Firstnametwo",
+                "secondForename" -> "Middlenametwo",
+                "surname" -> "Surname",
                 "addressLine1" -> "33 Fake Street",
-                "addressLine2" -> "Fake Area",
+                "addressLine2" -> "AB Area",
                 "addressLine3" -> "Some District",
                 "addressLine4" -> "Anytown",
                 "ukPostcode" -> "ZZ1 1ZZ",
@@ -266,11 +266,11 @@ class CheckYourAnswersControllerSpec extends SpecBase {
               "organisation" -> Json.obj(
                 "organisationName" -> "Test Organisation",
                 "title" -> "Ms",
-                "firstForename" -> "Jane",
-                "secondForename" -> "Ann",
-                "surname" -> "Doe",
+                "firstForename" -> "Firstnametwo",
+                "secondForename" -> "Middlenametwo",
+                "surname" -> "Surname",
                 "addressLine1" -> "33 Fake Street",
-                "addressLine2" -> "Fake Area",
+                "addressLine2" -> "AB Area",
                 "addressLine3" -> "Some District",
                 "addressLine4" -> "Anytown",
                 "ukPostcode" -> "ZZ1 1ZZ",
@@ -416,9 +416,9 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.Deceased),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get
@@ -434,9 +434,9 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           IndividualNamePage(JourneyRole.PrIndividual),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .get

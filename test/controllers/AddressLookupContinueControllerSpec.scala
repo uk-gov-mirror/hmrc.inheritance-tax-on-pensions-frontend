@@ -37,8 +37,8 @@ class AddressLookupContinueControllerSpec extends SpecBase {
     id = Some(addressId),
     address = AlfAddress(
       organisation = None,
-      lines = Seq("33 Fake Street", "Fake Area"),
-      town = Some("Fakeville"),
+      lines = Seq("33 AB Street", "AB Area"),
+      town = Some("ABville"),
       postcode = Some("ZZ1 1ZZ"),
       country = AlfCountry("GB", "United Kingdom")
     )
@@ -91,10 +91,10 @@ class AddressLookupContinueControllerSpec extends SpecBase {
 
             (userAnswersCaptor.getValue.data \ "prDetails" \ journeyRole.name).as[PrAddress] mustBe
               PrAddress(
-                addressLine1 = "33 Fake Street",
-                addressLine2 = Some("Fake Area"),
+                addressLine1 = "33 AB Street",
+                addressLine2 = Some("AB Area"),
                 addressLine3 = None,
-                addressLine4 = Some("Fakeville"),
+                addressLine4 = Some("ABville"),
                 ukPostcode = Some("ZZ1 1ZZ"),
                 country = "GB"
               )
@@ -201,10 +201,10 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         data = Json.obj(
           "prDetails" -> Json.obj(
             "individual" -> Json.obj(
-              "firstForename" -> "John",
-              "surname" -> "Doe",
-              "addressLine1" -> "33 Fake Street",
-              "addressLine2" -> "Fake Area",
+              "firstForename" -> "Firstname",
+              "surname" -> "Surname",
+              "addressLine1" -> "33 AB Street",
+              "addressLine2" -> "AB Area",
               "addressLine3" -> "Some District",
               "addressLine4" -> "Anytown",
               "ukPostcode" -> "ZZ1 1ZZ",
@@ -218,8 +218,8 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         id = Some(addressId),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("11 A Boulevard", "Fakeville"),
-          town = Some("Fakeville"),
+          lines = Seq("11 A Boulevard", "ABville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
@@ -254,10 +254,10 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         val updatedIndividual = (userAnswersCaptor.getValue.data \ "prDetails" \ "individual").as[JsObject]
 
         updatedIndividual mustBe Json.obj(
-          "firstForename" -> "John",
-          "surname" -> "Doe",
+          "firstForename" -> "Firstname",
+          "surname" -> "Surname",
           "addressLine1" -> "11 A Boulevard",
-          "addressLine2" -> "Fakeville",
+          "addressLine2" -> "ABville",
           "ukPostcode" -> "ZZ1 1ZZ",
           "country" -> "GB"
         )
@@ -273,9 +273,9 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         data = Json.obj(
           "prDetails" -> Json.obj(
             "organisation" -> Json.obj(
-              "organisationName" -> "Fake Org",
-              "addressLine1" -> "33 Fake Street",
-              "addressLine2" -> "Fake Area",
+              "organisationName" -> "AB Org",
+              "addressLine1" -> "33 AB Street",
+              "addressLine2" -> "AB Area",
               "addressLine3" -> "Some District",
               "addressLine4" -> "Anytown",
               "ukPostcode" -> "ZZ1 1ZZ",
@@ -289,8 +289,8 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         id = Some(addressId),
         address = AlfAddress(
           organisation = None,
-          lines = Seq("11 A Boulevard", "Fakeville"),
-          town = Some("Fakeville"),
+          lines = Seq("11 A Boulevard", "ABville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )
@@ -325,9 +325,9 @@ class AddressLookupContinueControllerSpec extends SpecBase {
         val updatedOrganisation = (userAnswersCaptor.getValue.data \ "prDetails" \ "organisation").as[JsObject]
 
         updatedOrganisation mustBe Json.obj(
-          "organisationName" -> "Fake Org",
+          "organisationName" -> "AB Org",
           "addressLine1" -> "11 A Boulevard",
-          "addressLine2" -> "Fakeville",
+          "addressLine2" -> "ABville",
           "ukPostcode" -> "ZZ1 1ZZ",
           "country" -> "GB"
         )

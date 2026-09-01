@@ -43,11 +43,11 @@ class AddressLookupStartControllerSpec extends SpecBase {
       emptyUserAnswers
         .set(
           IndividualNamePage(PrIndividual),
-          IndividualName(Some("Mr"), "John", Some("William"), "Doe")
+          IndividualName(Some("Mr"), "Firstname", Some("Middlename"), "Surname")
         )
         .success
         .value,
-      "John Doe"
+      "Firstname Surname"
     ),
     JourneyRoleTestCase(
       JourneyRole.PrOrganisation,

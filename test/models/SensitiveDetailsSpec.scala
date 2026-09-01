@@ -49,8 +49,8 @@ class SensitiveDetailsSpec extends SpecBase {
     "must encrypt different values differently" in {
       implicit val crypto: uk.gov.hmrc.crypto.Encrypter & uk.gov.hmrc.crypto.Decrypter =
         SymmetricCryptoFactory.aesGcmCrypto(testKey)
-      val string1 = SensitiveString("jane doe")
-      val string2 = SensitiveString("john doe")
+      val string1 = SensitiveString("firstnametwo surname")
+      val string2 = SensitiveString("firstname surname")
 
       val json1 = Json.toJson(string1)(using SensitiveDetails.sensitiveStringFormat)
       val json2 = Json.toJson(string2)(using SensitiveDetails.sensitiveStringFormat)
@@ -83,92 +83,92 @@ class SensitiveDetailsSpec extends SpecBase {
 
     "must serialize and deserialize with plain format" in {
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
-        middleName = Some(SensitiveString("Robert")),
-        lastName = SensitiveString("Doe")
+        firstName = SensitiveString("Firstname"),
+        middleName = Some(SensitiveString("Middlename")),
+        lastName = SensitiveString("Surname")
       )
 
       val json = Json.toJson(details)(using SensitiveDetails.sensitiveIndividualDetailsWrites)
       val result = json.as[SensitiveIndividualDetails](using SensitiveDetails.sensitiveIndividualDetailsReads)
 
-      result.firstName.decryptedValue mustBe "John"
-      result.middleName.map(_.decryptedValue) mustBe Some("Robert")
-      result.lastName.decryptedValue mustBe "Doe"
+      result.firstName.decryptedValue mustBe "Firstname"
+      result.middleName.map(_.decryptedValue) mustBe Some("Middlename")
+      result.lastName.decryptedValue mustBe "Surname"
     }
 
     "must serialize and deserialize with encrypted format" in {
       implicit val crypto: uk.gov.hmrc.crypto.Encrypter & uk.gov.hmrc.crypto.Decrypter =
         SymmetricCryptoFactory.aesGcmCrypto(testKey)
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
-        middleName = Some(SensitiveString("Robert")),
-        lastName = SensitiveString("Doe")
+        firstName = SensitiveString("Firstname"),
+        middleName = Some(SensitiveString("Middlename")),
+        lastName = SensitiveString("Surname")
       )
 
       val json = Json.toJson(details)(using SensitiveDetails.sensitiveIndividualDetailsFormat)
       val result = json.as[SensitiveIndividualDetails](using SensitiveDetails.sensitiveIndividualDetailsFormat)
 
-      result.firstName.decryptedValue mustBe "John"
-      result.middleName.map(_.decryptedValue) mustBe Some("Robert")
-      result.lastName.decryptedValue mustBe "Doe"
+      result.firstName.decryptedValue mustBe "Firstname"
+      result.middleName.map(_.decryptedValue) mustBe Some("Middlename")
+      result.lastName.decryptedValue mustBe "Surname"
 
       val jsonString = Json.stringify(json)
       jsonString must not be empty
-      (jsonString must not).include("John")
-      (jsonString must not).include("Robert")
-      (jsonString must not).include("Doe")
+      (jsonString must not).include("Firstname")
+      (jsonString must not).include("Middlename")
+      (jsonString must not).include("Surname")
     }
 
     "must handle missing middle name" in {
       implicit val crypto: uk.gov.hmrc.crypto.Encrypter & uk.gov.hmrc.crypto.Decrypter =
         SymmetricCryptoFactory.aesGcmCrypto(testKey)
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
 
       val json = Json.toJson(details)(using SensitiveDetails.sensitiveIndividualDetailsFormat)
       val result = json.as[SensitiveIndividualDetails](using SensitiveDetails.sensitiveIndividualDetailsFormat)
 
-      result.firstName.decryptedValue mustBe "John"
+      result.firstName.decryptedValue mustBe "Firstname"
       result.middleName mustBe None
-      result.lastName.decryptedValue mustBe "Doe"
+      result.lastName.decryptedValue mustBe "Surname"
     }
 
     "must generate full name" in {
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
-        middleName = Some(SensitiveString("Robert")),
-        lastName = SensitiveString("Doe")
+        firstName = SensitiveString("Firstname"),
+        middleName = Some(SensitiveString("Middlename")),
+        lastName = SensitiveString("Surname")
       )
-      details.fullName mustBe "John Robert Doe"
+      details.fullName mustBe "Firstname Middlename Surname"
     }
 
     "must generate full name without middle name" in {
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
-      details.fullName mustBe "John  Doe"
+      details.fullName mustBe "Firstname  Surname"
     }
 
     "must implement equals correctly" in {
       val details1 = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
       val details2 = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
       val details3 = SensitiveIndividualDetails(
-        firstName = SensitiveString("Jane"),
+        firstName = SensitiveString("Firstnametwo"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
 
       details1 mustEqual details2
@@ -177,9 +177,9 @@ class SensitiveDetailsSpec extends SpecBase {
 
     "must not equal non-SensitiveIndividualDetails" in {
       val details = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
       (details must not).equal("some string")
       (details must not).equal(null)
@@ -187,19 +187,19 @@ class SensitiveDetailsSpec extends SpecBase {
 
     "must implement hashCode correctly" in {
       val details1 = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
       val details2 = SensitiveIndividualDetails(
-        firstName = SensitiveString("John"),
+        firstName = SensitiveString("Firstname"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
       val details3 = SensitiveIndividualDetails(
-        firstName = SensitiveString("Jane"),
+        firstName = SensitiveString("Firstnametwo"),
         middleName = None,
-        lastName = SensitiveString("Doe")
+        lastName = SensitiveString("Surname")
       )
 
       details1.hashCode mustEqual details2.hashCode

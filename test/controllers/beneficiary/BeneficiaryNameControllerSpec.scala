@@ -38,9 +38,9 @@ class BeneficiaryNameControllerSpec extends SpecBase {
 
   private val individualName = IndividualName(
     title = Some("Mr"),
-    firstForename = "John",
-    secondForename = Some("William"),
-    surname = "Doe"
+    firstForename = "Firstname",
+    secondForename = Some("Middlename"),
+    surname = "Surname"
   )
 
   private case class JourneyRoleTestCase(
@@ -267,9 +267,9 @@ class BeneficiaryNameControllerSpec extends SpecBase {
 
   private val validFormData = Seq(
     "title" -> "Mr",
-    "firstForename" -> "John",
-    "secondForename" -> "William",
-    "surname" -> "Doe"
+    "firstForename" -> "Firstname",
+    "secondForename" -> "Middlename",
+    "surname" -> "Surname"
   )
 
   private val invalidFormData = Seq(

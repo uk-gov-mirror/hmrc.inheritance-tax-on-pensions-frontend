@@ -61,7 +61,7 @@ class AddressLookupFrontendServiceSpec extends SpecBase {
           when(mockConnector.initJourney(eqTo(srn), eqTo(NormalMode), any(), any())(using any()))
             .thenReturn(Future.successful("/lookup-address"))
 
-          val result = service.initJourney(srn, NormalMode, "John Doe", journeyRole).futureValue
+          val result = service.initJourney(srn, NormalMode, "Firstname Surname", journeyRole).futureValue
 
           result mustBe "/lookup-address"
 
@@ -79,11 +79,11 @@ class AddressLookupFrontendServiceSpec extends SpecBase {
           journeyConfig.options.manualAddressEntryConfig.mandatoryFields.addressLine1 mustBe true
           journeyConfig.options.manualAddressEntryConfig.mandatoryFields.addressLine2 mustBe true
           journeyConfig.options.manualAddressEntryConfig.showOrganisationName mustBe false
-          journeyConfig.labels.en.countryPickerLabels.heading must include("John Doe")
+          journeyConfig.labels.en.countryPickerLabels.heading must include("Firstname Surname")
           journeyConfig.labels.en.appLevelLabels.phaseBannerHtml mustBe
             messagesApi.preferred(Seq.empty)("addressLookup.phaseBannerHtml")
-          journeyConfig.labels.en.lookupPageLabels.heading must include("John Doe")
-          journeyConfig.labels.en.international.editPageLabels.heading must include("John Doe")
+          journeyConfig.labels.en.lookupPageLabels.heading must include("Firstname Surname")
+          journeyConfig.labels.en.international.editPageLabels.heading must include("Firstname Surname")
         }
       }
     }
@@ -101,7 +101,7 @@ class AddressLookupFrontendServiceSpec extends SpecBase {
         address = AlfAddress(
           organisation = None,
           lines = Seq("33 Fake Street"),
-          town = Some("Fakeville"),
+          town = Some("ABville"),
           postcode = Some("ZZ1 1ZZ"),
           country = AlfCountry("GB", "United Kingdom")
         )

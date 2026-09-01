@@ -36,14 +36,14 @@ class PrNameHelperSpec extends AnyFreeSpec with SpecBase {
             IndividualNamePage(JourneyRole.PrIndividual),
             IndividualName(
               title = Some("Dr"),
-              firstForename = "John",
-              secondForename = Some("William"),
-              surname = "Doe"
+              firstForename = "Firstname",
+              secondForename = Some("Middlename"),
+              surname = "Surname"
             )
           )
           .get
 
-        fromUserAnswers(userAnswers) mustBe Some("John Doe")
+        fromUserAnswers(userAnswers) mustBe Some("Firstname Surname")
       }
       "must return None when the PR name has not been answered" in {
 
@@ -60,15 +60,15 @@ class PrNameHelperSpec extends AnyFreeSpec with SpecBase {
             IndividualNamePage(JourneyRole.PrIndividual),
             IndividualName(
               title = Some("Mr"),
-              firstForename = "John",
-              secondForename = Some("William"),
-              surname = "Doe"
+              firstForename = "Firstname",
+              secondForename = Some("Middlename"),
+              surname = "Surname"
             )
           )
           .success
           .value
 
-        PrNameHelper.withName(userAnswers)("missing")(name => s"found $name") mustBe "found John Doe"
+        PrNameHelper.withName(userAnswers)("missing")(name => s"found $name") mustBe "found Firstname Surname"
       }
 
       "must run the fallback block when the individual name has not been answered" in {
@@ -85,11 +85,11 @@ class PrNameHelperSpec extends AnyFreeSpec with SpecBase {
           .get
           .set(
             IndividualNamePage(JourneyRole.PrOrganisation),
-            IndividualName(Some("Mrs"), "Sarah", Some("Jane"), "Wilson")
+            IndividualName(Some("Mrs"), "Firstnamethree", Some("Middlenametwo"), "Surnametwo")
           )
           .get
 
-        fromUserAnswers(userAnswers) mustBe Some("Sarah Wilson")
+        fromUserAnswers(userAnswers) mustBe Some("Firstnamethree Surnametwo")
       }
 
       "must return None when the organisation PR name has not been answered" in {

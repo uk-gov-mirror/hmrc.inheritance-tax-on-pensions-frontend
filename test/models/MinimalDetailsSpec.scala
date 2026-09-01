@@ -35,9 +35,9 @@ class MinimalDetailsSpec extends SpecBase {
         organisationName = Some("Test Org"),
         individualDetails = Some(
           SensitiveIndividualDetails(
-            firstName = SensitiveString("John"),
+            firstName = SensitiveString("Firstname"),
             middleName = None,
-            lastName = SensitiveString("Doe")
+            lastName = SensitiveString("Surname")
           )
         ),
         rlsFlag = false,
@@ -50,8 +50,8 @@ class MinimalDetailsSpec extends SpecBase {
       result.email.decryptedValue mustBe "test@example.com"
       result.isPsaSuspended mustBe false
       result.organisationName mustBe Some("Test Org")
-      result.individualDetails.get.firstName.decryptedValue mustBe "John"
-      result.individualDetails.get.lastName.decryptedValue mustBe "Doe"
+      result.individualDetails.get.firstName.decryptedValue mustBe "Firstname"
+      result.individualDetails.get.lastName.decryptedValue mustBe "Surname"
       result.rlsFlag mustBe false
       result.deceasedFlag mustBe false
 
@@ -65,9 +65,9 @@ class MinimalDetailsSpec extends SpecBase {
         organisationName = Some("Test Org"),
         individualDetails = Some(
           SensitiveIndividualDetails(
-            firstName = SensitiveString("John"),
+            firstName = SensitiveString("Firstname"),
             middleName = None,
-            lastName = SensitiveString("Doe")
+            lastName = SensitiveString("Surname")
           )
         ),
         rlsFlag = false,
@@ -80,8 +80,8 @@ class MinimalDetailsSpec extends SpecBase {
       result.email.decryptedValue mustBe "test@example.com"
       result.isPsaSuspended mustBe false
       result.organisationName mustBe Some("Test Org")
-      result.individualDetails.get.firstName.decryptedValue mustBe "John"
-      result.individualDetails.get.lastName.decryptedValue mustBe "Doe"
+      result.individualDetails.get.firstName.decryptedValue mustBe "Firstname"
+      result.individualDetails.get.lastName.decryptedValue mustBe "Surname"
 
       val emailValue = (json \ "email").as[String]
       (emailValue must not).equal("test@example.com")
@@ -89,7 +89,7 @@ class MinimalDetailsSpec extends SpecBase {
 
       val individualDetailsValue = Json.stringify((json \ "individualDetails").get)
       individualDetailsValue.length must be > 0
-      (individualDetailsValue must not).include("John")
+      (individualDetailsValue must not).include("Firstname")
     }
 
     "must handle organisation without individual details" in {
@@ -120,9 +120,9 @@ class MinimalDetailsSpec extends SpecBase {
         organisationName = None,
         individualDetails = Some(
           SensitiveIndividualDetails(
-            firstName = SensitiveString("Jane"),
-            middleName = Some(SensitiveString("Marie")),
-            lastName = SensitiveString("Doe")
+            firstName = SensitiveString("Firstnametwo"),
+            middleName = Some(SensitiveString("Middlenametwo")),
+            lastName = SensitiveString("Surname")
           )
         ),
         rlsFlag = false,
@@ -134,9 +134,9 @@ class MinimalDetailsSpec extends SpecBase {
 
       result.email.decryptedValue mustBe "individual@example.com"
       result.organisationName mustBe None
-      result.individualDetails.get.firstName.decryptedValue mustBe "Jane"
-      result.individualDetails.get.middleName.map(_.decryptedValue) mustBe Some("Marie")
-      result.individualDetails.get.lastName.decryptedValue mustBe "Doe"
+      result.individualDetails.get.firstName.decryptedValue mustBe "Firstnametwo"
+      result.individualDetails.get.middleName.map(_.decryptedValue) mustBe Some("Middlenametwo")
+      result.individualDetails.get.lastName.decryptedValue mustBe "Surname"
       result.deceasedFlag mustBe true
     }
   }
@@ -145,42 +145,42 @@ class MinimalDetailsSpec extends SpecBase {
 
     "must serialize and deserialize" in {
       val details = IndividualDetails(
-        firstName = "Jane",
-        middleName = Some("Marie"),
-        lastName = "Doe"
+        firstName = "Firstnametwo",
+        middleName = Some("Middlenametwo"),
+        lastName = "Surname"
       )
 
       val json = Json.toJson(details)(using IndividualDetails.writes)
       val result = json.as[IndividualDetails](using IndividualDetails.reads)
 
-      result.firstName mustBe "Jane"
-      result.middleName mustBe Some("Marie")
-      result.lastName mustBe "Doe"
+      result.firstName mustBe "Firstnametwo"
+      result.middleName mustBe Some("Middlenametwo")
+      result.lastName mustBe "Surname"
     }
 
     "must generate full name" in {
       val details = IndividualDetails(
-        firstName = "Jane",
-        middleName = Some("Marie"),
-        lastName = "Doe"
+        firstName = "Firstnametwo",
+        middleName = Some("Middlenametwo"),
+        lastName = "Surname"
       )
 
-      details.fullName mustBe "Jane Marie Doe"
+      details.fullName mustBe "Firstnametwo Middlenametwo Surname"
     }
 
     "must serialize and deserialize without middle name" in {
       val details = IndividualDetails(
-        firstName = "Jane",
+        firstName = "Firstnametwo",
         middleName = None,
-        lastName = "Doe"
+        lastName = "Surname"
       )
 
       val json = Json.toJson(details)(using IndividualDetails.writes)
       val result = json.as[IndividualDetails](using IndividualDetails.reads)
 
-      result.firstName mustBe "Jane"
+      result.firstName mustBe "Firstnametwo"
       result.middleName mustBe None
-      result.lastName mustBe "Doe"
+      result.lastName mustBe "Surname"
     }
   }
 }

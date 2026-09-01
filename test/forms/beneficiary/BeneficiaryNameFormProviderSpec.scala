@@ -31,9 +31,9 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
 
       val data = Map(
         "title" -> "Mr",
-        "firstForename" -> "John",
-        "secondForename" -> "William",
-        "surname" -> "Doe"
+        "firstForename" -> "Firstname",
+        "secondForename" -> "Middlename",
+        "surname" -> "Surname"
       )
 
       val result = form.bind(data)
@@ -42,23 +42,23 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
       result.value mustBe Some(
         IndividualName(
           title = Some("Mr"),
-          firstForename = "John",
-          secondForename = Some("William"),
-          surname = "Doe"
+          firstForename = "Firstname",
+          secondForename = Some("Middlename"),
+          surname = "Surname"
         )
       )
     }
 
     "must fail when firstForename is blank" in {
 
-      val result = form.bind(Map("firstForename" -> "", "surname" -> "Doe"))
+      val result = form.bind(Map("firstForename" -> "", "surname" -> "Surname"))
 
       result.errors must contain(FormError("firstForename", "beneficiaryIndividualName.error.firstForename.required"))
     }
 
     "must fail when surname is blank" in {
 
-      val result = form.bind(Map("firstForename" -> "John", "surname" -> ""))
+      val result = form.bind(Map("firstForename" -> "Firstname", "surname" -> ""))
 
       result.errors must contain(FormError("surname", "beneficiaryIndividualName.error.surname.required"))
     }
@@ -89,9 +89,9 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
       val result = form.bind(
         Map(
           "title" -> "M12",
-          "firstForename" -> "John1",
-          "secondForename" -> "William1",
-          "surname" -> "Doe1"
+          "firstForename" -> "Firstname1",
+          "secondForename" -> "Middlename1",
+          "surname" -> "Surname1"
         )
       )
 
@@ -128,9 +128,9 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
       val result = form.bind(
         Map(
           "title" -> " Mr ",
-          "firstForename" -> " John ",
-          "secondForename" -> " William ",
-          "surname" -> " Doe "
+          "firstForename" -> " Firstname ",
+          "secondForename" -> " Middlename ",
+          "surname" -> " Surname "
         )
       )
 
@@ -138,9 +138,9 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
       result.value mustBe Some(
         IndividualName(
           title = Some("Mr"),
-          firstForename = "John",
-          secondForename = Some("William"),
-          surname = "Doe"
+          firstForename = "Firstname",
+          secondForename = Some("Middlename"),
+          surname = "Surname"
         )
       )
     }
@@ -179,9 +179,9 @@ class BeneficiaryNameFormProviderSpec extends forms.behaviours.StringFieldBehavi
       val result = organisationForm.bind(
         Map(
           "title" -> "M12",
-          "firstForename" -> "John1",
-          "secondForename" -> "William1",
-          "surname" -> "Doe1"
+          "firstForename" -> "Firstname1",
+          "secondForename" -> "Middlename1",
+          "surname" -> "Surname1"
         )
       )
 

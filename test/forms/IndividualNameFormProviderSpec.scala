@@ -30,9 +30,9 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
 
       val data = Map(
         "title" -> "Mr",
-        "firstForename" -> "John",
-        "secondForename" -> "William",
-        "surname" -> "Doe"
+        "firstForename" -> "Firstname",
+        "secondForename" -> "Middlename",
+        "surname" -> "Surname"
       )
 
       val result = form.bind(data)
@@ -41,23 +41,23 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       result.value mustBe Some(
         IndividualName(
           title = Some("Mr"),
-          firstForename = "John",
-          secondForename = Some("William"),
-          surname = "Doe"
+          firstForename = "Firstname",
+          secondForename = Some("Middlename"),
+          surname = "Surname"
         )
       )
     }
 
     "must fail when firstForename is blank" in {
 
-      val result = form.bind(Map("firstForename" -> "", "surname" -> "Doe"))
+      val result = form.bind(Map("firstForename" -> "", "surname" -> "Surname"))
 
       result.errors must contain(FormError("firstForename", "prIndividualName.error.firstForename.required"))
     }
 
     "must fail when surname is blank" in {
 
-      val result = form.bind(Map("firstForename" -> "John", "surname" -> ""))
+      val result = form.bind(Map("firstForename" -> "Firstname", "surname" -> ""))
 
       result.errors must contain(FormError("surname", "prIndividualName.error.surname.required"))
     }
@@ -84,9 +84,9 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       val result = form.bind(
         Map(
           "title" -> "M12",
-          "firstForename" -> "John1",
-          "secondForename" -> "William1",
-          "surname" -> "Doe1"
+          "firstForename" -> "Firstname1",
+          "secondForename" -> "Middlename1",
+          "surname" -> "Surname1"
         )
       )
 
@@ -123,9 +123,9 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       val result = form.bind(
         Map(
           "title" -> " Mr ",
-          "firstForename" -> " John ",
-          "secondForename" -> " William ",
-          "surname" -> " Doe "
+          "firstForename" -> " Firstname ",
+          "secondForename" -> " Middlename ",
+          "surname" -> " Surname "
         )
       )
 
@@ -133,9 +133,9 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       result.value mustBe Some(
         IndividualName(
           title = Some("Mr"),
-          firstForename = "John",
-          secondForename = Some("William"),
-          surname = "Doe"
+          firstForename = "Firstname",
+          secondForename = Some("Middlename"),
+          surname = "Surname"
         )
       )
     }
@@ -172,9 +172,9 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       val result = organisationForm.bind(
         Map(
           "title" -> "M12",
-          "firstForename" -> "John1",
-          "secondForename" -> "William1",
-          "surname" -> "Doe1"
+          "firstForename" -> "Firstname1",
+          "secondForename" -> "Middlename1",
+          "surname" -> "Surname1"
         )
       )
 

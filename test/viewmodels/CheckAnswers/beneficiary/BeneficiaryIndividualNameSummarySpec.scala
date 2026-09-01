@@ -43,9 +43,9 @@ class BeneficiaryIndividualNameSummarySpec extends org.scalatest.freespec.AnyFre
           BeneficiaryNamePage(testIndex, JourneyRole.BeneficiaryIndividual),
           IndividualName(
             title = Some("Mr"),
-            firstForename = "John",
-            secondForename = Some("William"),
-            surname = "Doe"
+            firstForename = "Firstname",
+            secondForename = Some("Middlename"),
+            surname = "Surname"
           )
         )
         .success
@@ -55,7 +55,7 @@ class BeneficiaryIndividualNameSummarySpec extends org.scalatest.freespec.AnyFre
 
       result mustBe defined
       result.get.key.content mustBe Text(messages("beneficiaryIndividualName.checkYourAnswersLabel"))
-      result.get.value.content mustBe HtmlContent("Mr John William Doe")
+      result.get.value.content mustBe HtmlContent("Mr Firstname Middlename Surname")
       result.get.actions.get.items.head.href mustBe
         controllers.beneficiary.routes.BeneficiaryNameController
           .onPageLoad(srn, CheckMode, testIndex)
