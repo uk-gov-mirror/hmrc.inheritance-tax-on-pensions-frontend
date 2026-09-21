@@ -16,22 +16,21 @@
 
 package controllers
 
-import play.api.test.Helpers._
-import pages._
+import play.api.test.Helpers.*
+import pages.*
 import viewmodels.CheckAnswers.beneficiary.{BeneficiaryHasNinoSummary, BeneficiaryTypeSummary}
 import views.html.CheckYourAnswersView
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{Actions, SummaryList}
 import viewmodels.govuk.all.{ActionItemViewModel, CardViewModel, SummaryListViewModel}
 import play.api.libs.json.Json
-import models._
-import viewmodels.CheckAnswers._
-import models.JourneyRole.PrIndividual
+import models.*
+import viewmodels.CheckAnswers.*
+import models.JourneyRole.{Deceased, PrIndividual}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 import base.SpecBase
 
-import scala.jdk.CollectionConverters._
-
+import scala.jdk.CollectionConverters.*
 import java.time.LocalDate
 
 class CheckYourAnswersControllerSpec extends SpecBase {
@@ -340,7 +339,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
             prDetailsSummaryList,
             paymentNoticeDetailsSummaryList,
             emptyBeneficiarySummaryListViewModel,
-            Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
+            Some(routes.IndividualNameController.onPageLoad(srn = srn, mode = NormalMode, Deceased))
           )(using
             request,
             messages(application)
@@ -408,7 +407,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
             prDetailsSummaryList,
             paymentNoticeDetailsSummaryList,
             emptyBeneficiarySummaryListViewModel,
-            Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
+            Some(routes.IndividualNameController.onPageLoad(srn = srn, mode = NormalMode, Deceased))
           )(using
             request,
             messages(application)
@@ -478,7 +477,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
             prDetailsSummaryList,
             paymentNoticeDetailsSummaryList,
             emptyBeneficiarySummaryListViewModel,
-            Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
+            Some(routes.IndividualNameController.onPageLoad(srn = srn, mode = NormalMode, Deceased))
           )(using
             request,
             messages(application)
@@ -561,7 +560,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
             emptySummaryList,
             emptySummaryList,
             beneficiarySummaryList,
-            Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
+            Some(routes.IndividualNameController.onPageLoad(srn = srn, mode = NormalMode, Deceased))
           )(using
             request,
             messages(application)

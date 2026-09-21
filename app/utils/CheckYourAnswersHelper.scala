@@ -16,7 +16,7 @@
 
 package utils
 
-import models.JourneyRole.{BeneficiaryIndividual, PrIndividual, PrOrganisation}
+import models.JourneyRole._
 import viewmodels.implicits._
 import play.api.mvc.Call
 import pages._
@@ -140,6 +140,10 @@ object CheckYourAnswersHelper {
   private def getDeceasedPages(srn: Srn) =
     Seq(
       ContinuationPage(
+        answers => answers.get(IndividualNamePage(Deceased)).isEmpty,
+        routes.IndividualNameController.onPageLoad(srn, NormalMode, Deceased)
+      ),
+      ContinuationPage(
         answers => answers.get(HasNinoPage).isEmpty,
         routes.HasNinoController.onPageLoad(srn, NormalMode)
       ),
@@ -193,12 +197,18 @@ object CheckYourAnswersHelper {
         routes.DidPrSubmitController.onPageLoad(srn, NormalMode)
       ),
       ContinuationPage(
+        answers => answers.get(DidPrSubmitPage).get && answers.get(AreBeneficiariesKnownPage).isEmpty,
+        routes.AreBeneficiariesKnownController.onPageLoad(srn, NormalMode)
+      ),
+      ContinuationPage(
         answers => answers.get(PaymentNoticeDatePage).isEmpty,
         routes.PaymentNoticeDateController.onPageLoad(srn, NormalMode)
       ),
       ContinuationPage(
-        answers => answers.get(DidPrSubmitPage).get && answers.get(AreBeneficiariesKnownPage).isEmpty,
-        routes.AreBeneficiariesKnownController.onPageLoad(srn, NormalMode)
+        answers =>
+          answers.get(AreBeneficiariesKnownPage).getOrElse(false) &&
+            answers.get(pages.beneficiary.BeneficiaryTypePage(0)).isEmpty,
+        controllers.beneficiary.routes.BeneficiaryTypeController.onPageLoad(srn, 0, NormalMode)
       )
     )
 
@@ -217,7 +227,9 @@ object CheckYourAnswersHelper {
         controllers.beneficiary.routes.BeneficiaryTrustNameController.onPageLoad(srn, i, NormalMode)
       ),
       ContinuationPage(
-        answers => answers.get(pages.beneficiary.BeneficiaryHasNinoPage(i)).isEmpty,
+        answers =>
+          answers.get(pages.beneficiary.BeneficiaryTypePage(i)).contains(BeneficiaryType.Individual) &&
+            answers.get(pages.beneficiary.BeneficiaryHasNinoPage(i)).isEmpty,
         controllers.beneficiary.routes.BeneficiaryHasNinoController.onPageLoad(srn, i, NormalMode)
       )
     )
