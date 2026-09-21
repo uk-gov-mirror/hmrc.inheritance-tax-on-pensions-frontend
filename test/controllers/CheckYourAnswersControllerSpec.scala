@@ -16,7 +16,6 @@
 
 package controllers
 
-import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import models.SummaryRole.CheckYourAnswers
 import pages._
@@ -27,6 +26,8 @@ import viewmodels.govuk.all.{ActionItemViewModel, CardViewModel, SummaryListView
 import play.api.libs.json.Json
 import models._
 import viewmodels.CheckAnswers._
+import models.JourneyRole.PrIndividual
+import play.api.test.FakeRequest
 import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 import base.SpecBase
 
@@ -182,7 +183,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           paymentNoticeDetailsSummaryList,
           emptyBeneficiarySummaryListViewModel,
           CheckYourAnswers,
-          None
+          Some(routes.AddressLookupStartController.start(srn = srn, mode = NormalMode, journeyRole = PrIndividual))
         )(using
           request,
           messages(application)
@@ -265,7 +266,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           paymentNoticeDetailsSummaryList,
           emptyBeneficiarySummaryListViewModel,
           CheckYourAnswers,
-          None
+          Some(routes.AddressLookupStartController.start(srn = srn, mode = NormalMode, journeyRole = PrIndividual))
         )(using
           request,
           messages(application)
@@ -309,7 +310,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           paymentNoticeDetailsSummaryList,
           emptyBeneficiarySummaryListViewModel,
           CheckYourAnswers,
-          None
+          Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
         )(using
           request,
           messages(application)
@@ -378,7 +379,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           paymentNoticeDetailsSummaryList,
           emptyBeneficiarySummaryListViewModel,
           CheckYourAnswers,
-          None
+          Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
         )(using
           request,
           messages(application)
@@ -449,7 +450,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
           paymentNoticeDetailsSummaryList,
           emptyBeneficiarySummaryListViewModel,
           CheckYourAnswers,
-          None
+          Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
         )(using
           request,
           messages(application)
@@ -526,15 +527,14 @@ class CheckYourAnswersControllerSpec extends SpecBase {
         )
 
         status(result) mustEqual OK
-        val x = contentAsString(result)
-        x mustEqual view(
+        contentAsString(result) mustEqual view(
           srn,
           emptySummaryList,
           emptySummaryList,
           emptySummaryList,
           beneficiarySummaryList,
           CheckYourAnswers,
-          None
+          Some(routes.HasNinoController.onPageLoad(srn = srn, mode = NormalMode))
         )(using
           request,
           messages(application)

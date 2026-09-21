@@ -71,7 +71,7 @@ class SubmissionListController @Inject() (
           request.session + ("uuid" -> uuid)
         }
 
-        Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.Continue))
+        Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers))
           .withSession(updatedSession)
       }
 

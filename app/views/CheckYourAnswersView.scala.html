@@ -28,7 +28,7 @@
     govukButton: GovukButton
 )
 
-@(srn: Srn, deceasedDetailsSummaryList: SummaryList, prDetailsSummaryList: SummaryList, paymentNoticeDetailsSummaryList: SummaryList, beneficiaryList: List[SummaryList], summaryRole: SummaryRole, route: Option[Call])(implicit request: Request[?], messages: Messages)
+@(srn: Srn, deceasedDetailsSummaryList: SummaryList, prDetailsSummaryList: SummaryList, paymentNoticeDetailsSummaryList: SummaryList, beneficiaryList: List[SummaryList], summaryRole: SummaryRole, continueRoute: Option[Call])(implicit request: Request[?], messages: Messages)
 
 @layout(pageTitle = titleNoForm(messages("checkYourAnswers.title"))) {
 
@@ -59,27 +59,27 @@
             }
         }
 
-        @if(summaryRole == SummaryRole.CheckYourAnswers) {
+        @if(continueRoute.isDefined) {
             <div class="govuk-button-group">
                 @govukButton(
-                ButtonViewModel(messages("site.saveAndContinue"))
-                )
-                @govukButton(
-                Button(
-                content = Text(messages("site.saveAsDraft")),
-                id = Some("saved-as-draft-link"),
-                href = Some(routes.SubmissionListController.onPageLoad(srn).url),
-                preventDoubleClick = Some(true)
-                ).asSecondaryButton()
+                    Button(
+                        content = Text(messages("site.continue")),
+                        href = Some(continueRoute.get.url)
+                    )
                 )
             </div>
-        } else if(summaryRole == SummaryRole.Continue && route.isDefined) {
+        } else {
             <div class="govuk-button-group">
                 @govukButton(
-                Button(
-                content = Text(messages("site.continue")),
-                href = Some(route.get.url)
+                    ButtonViewModel(messages("site.saveAndContinue"))
                 )
+                @govukButton(
+                    Button(
+                        content = Text(messages("site.saveAsDraft")),
+                        id = Some("saved-as-draft-link"),
+                        href = Some(routes.SubmissionListController.onPageLoad(srn).url),
+                        preventDoubleClick = Some(true)
+                    ).asSecondaryButton()
                 )
             </div>
         }
