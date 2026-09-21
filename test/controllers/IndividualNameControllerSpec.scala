@@ -166,7 +166,7 @@ class IndividualNameControllerSpec extends SpecBase {
           val expectedNextPage = journeyRole match {
             case JourneyRole.PrIndividual | JourneyRole.PrOrganisation =>
               routes.AddressLookupStartController.start(srn, CheckMode, journeyRole).url
-            case _ => routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers).url
+            case _ => routes.CheckYourAnswersController.onPageLoad(srn).url
           }
 
           status(result) mustEqual SEE_OTHER
@@ -220,7 +220,7 @@ class IndividualNameControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual routes.CheckYourAnswersController
-          .onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }
@@ -246,7 +246,7 @@ class IndividualNameControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual routes.CheckYourAnswersController
-          .onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }

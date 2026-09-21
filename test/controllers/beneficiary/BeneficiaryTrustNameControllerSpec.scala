@@ -94,7 +94,7 @@ class BeneficiaryTrustNameControllerSpec extends SpecBase {
           val expectedUrl = mode match {
             case NormalMode => routes.BeneficiaryListController.onPageLoad(srn).url
             case CheckMode =>
-              controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers).url
+              controllers.routes.CheckYourAnswersController.onPageLoad(srn).url
           }
 
           status(result) mustEqual SEE_OTHER

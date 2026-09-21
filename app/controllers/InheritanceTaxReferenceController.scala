@@ -83,7 +83,7 @@ class InheritanceTaxReferenceController @Inject() (
                   }
                   mode match {
                     case CheckMode =>
-                      Redirect(routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers))
+                      Redirect(routes.CheckYourAnswersController.onPageLoad(srn))
                         .withSession(updatedSession)
                     case NormalMode =>
                       Redirect(routes.IndividualNameController.onPageLoad(srn, NormalMode, JourneyRole.Deceased))

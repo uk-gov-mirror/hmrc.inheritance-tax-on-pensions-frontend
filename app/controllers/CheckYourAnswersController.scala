@@ -22,7 +22,7 @@ import com.google.inject.Inject
 import utils.CheckYourAnswersHelper.{buildSummaryLists, findPageToContinue}
 import controllers.actions._
 import play.api.Logging
-import models.{SummaryRole, UserAnswers}
+import models.UserAnswers
 import views.html.CheckYourAnswersView
 import models.SchemeId.Srn
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -41,7 +41,31 @@ class CheckYourAnswersController @Inject() (
     with I18nSupport
     with Logging {
 
-  def onPageLoad(srn: Srn, summaryRole: SummaryRole): Action[AnyContent] =
+  def onPageLoad(srn: Srn): Action[AnyContent] =
+    identify.andThen(allowAccess(srn)).andThen(getData).andThen(requireData) { implicit request =>
+
+      val userAnswers: UserAnswers = request.userAnswers
+      val continuePage = findPageToContinue(userAnswers, srn)
+      continuePage match {
+        case Some(value) =>
+          Redirect(routes.CheckYourAnswersController.onPageLoadContinueMode(srn))
+        case None =>
+          val checkYourAnswersSummaryLists =
+            buildSummaryLists(userAnswers, srn, countryService.nameForCode, messagesApi)
+          Ok(
+            view(
+              srn,
+              checkYourAnswersSummaryLists.deceasedDetailsSummaryList,
+              checkYourAnswersSummaryLists.prDetailsSummaryList,
+              checkYourAnswersSummaryLists.paymentNoticeDetailsSummaryList,
+              checkYourAnswersSummaryLists.beneficiaryList,
+              continuePage
+            )
+          )
+      }
+    }
+
+  def onPageLoadContinueMode(srn: Srn): Action[AnyContent] =
     identify.andThen(allowAccess(srn)).andThen(getData).andThen(requireData) { implicit request =>
 
       val userAnswers: UserAnswers = request.userAnswers
@@ -54,7 +78,6 @@ class CheckYourAnswersController @Inject() (
           checkYourAnswersSummaryLists.prDetailsSummaryList,
           checkYourAnswersSummaryLists.paymentNoticeDetailsSummaryList,
           checkYourAnswersSummaryLists.beneficiaryList,
-          summaryRole,
           continuePage
         )
       )

@@ -23,7 +23,7 @@ import models.SchemeId.Srn
 import views.html.beneficiary.BeneficiaryTrustNameView
 import controllers.actions._
 import forms.beneficiary.BeneficiaryTrustNameFormProvider
-import models.{Mode, SummaryRole, UserAnswers}
+import models.{Mode, UserAnswers}
 import pages.beneficiary.BeneficiaryTrustNamePage
 import play.api.i18n.MessagesApi
 
@@ -81,7 +81,7 @@ class BeneficiaryTrustNameController @Inject() (
     mode match {
       case models.NormalMode => routes.BeneficiaryListController.onPageLoad(srn)
       case models.CheckMode =>
-        controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+        controllers.routes.CheckYourAnswersController.onPageLoad(srn)
     }
 
   private def saveName(

@@ -18,7 +18,6 @@ package controllers.beneficiary
 
 import utils.BeneficiaryNameHelper
 import play.api.mvc._
-import models.SummaryRole.CheckYourAnswers
 import pages.DidPrSubmitPage
 import controllers.IhtpBaseController
 import models.SchemeId.Srn
@@ -27,7 +26,7 @@ import controllers.actions._
 import forms.beneficiary.BeneficiaryListFormProvider
 import viewmodels.beneficiary.BeneficiaryListItem
 import models.beneficiary.{Beneficiaries, BeneficiaryType}
-import models._
+import models.{CheckMode, NormalMode, UserAnswers}
 import pages.beneficiary.BeneficiariesPage
 import play.api.i18n.MessagesApi
 
@@ -60,10 +59,10 @@ class BeneficiaryListController @Inject() (
               case Left(result) => result
             }
           case Some(false) =>
-            Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn, CheckYourAnswers))
+            Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn))
           case None =>
             logger.warn("Did Pr submit answer is missing, cannot load the beneficiary list page")
-            Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn, CheckYourAnswers))
+            Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn))
         }
       }
 
@@ -88,7 +87,7 @@ class BeneficiaryListController @Inject() (
     if (addAnother) {
       routes.BeneficiaryTypeController.onPageLoad(srn, nextIndex, models.NormalMode)
     } else {
-      controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+      controllers.routes.CheckYourAnswersController.onPageLoad(srn)
     }
 
   private def beneficiariesAndItems(

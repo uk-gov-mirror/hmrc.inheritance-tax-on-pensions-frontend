@@ -86,6 +86,6 @@ class OrganisationNameController @Inject() (
         routes.IndividualNameController.onPageLoad(srn, CheckMode, JourneyRole.PrOrganisation)
       case CheckMode if userAnswers.get(PrOrganisationAddressPage).isEmpty =>
         routes.AddressLookupStartController.start(srn, CheckMode, JourneyRole.PrOrganisation)
-      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn)
     }
 }

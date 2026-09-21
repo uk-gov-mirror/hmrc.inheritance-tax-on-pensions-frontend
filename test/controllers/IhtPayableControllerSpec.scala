@@ -18,7 +18,6 @@ package controllers
 
 import play.api.test.FakeRequest
 import services.UserAnswersService
-import models.SummaryRole.CheckYourAnswers
 import org.jsoup.Jsoup
 import pages.{AreBeneficiariesKnownPage, IhtPayablePage}
 import play.api.inject.bind
@@ -68,7 +67,7 @@ class IhtPayableControllerSpec extends SpecBase {
             ).value
             status(result) mustBe SEE_OTHER
             redirectLocation(result).value mustBe routes.CheckYourAnswersController
-              .onPageLoad(srn, CheckYourAnswers)
+              .onPageLoad(srn)
               .url
             val saved = ArgumentCaptor.forClass(classOf[UserAnswers])
             verify(service).set(saved.capture())(using any(), any())

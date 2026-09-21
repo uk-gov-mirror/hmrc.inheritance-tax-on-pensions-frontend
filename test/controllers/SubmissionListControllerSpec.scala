@@ -265,7 +265,7 @@ class SubmissionListControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual controllers.routes.CheckYourAnswersController
-          .onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }

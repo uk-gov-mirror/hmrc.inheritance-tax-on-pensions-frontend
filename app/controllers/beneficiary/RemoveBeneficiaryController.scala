@@ -24,7 +24,7 @@ import models.SchemeId.Srn
 import views.html.beneficiary.RemoveBeneficiaryView
 import controllers.actions._
 import forms.beneficiary.RemoveBeneficiaryFormProvider
-import models._
+import models.{CheckMode, Mode, NormalMode}
 import pages.beneficiary.{BeneficiariesPage, BeneficiaryElementPage}
 import play.api.i18n.MessagesApi
 
@@ -84,7 +84,7 @@ class RemoveBeneficiaryController @Inject() (
                       case (Some(remainingBeneficiaries), NormalMode) if remainingBeneficiaries.nonEmpty =>
                         routes.BeneficiaryListController.onPageLoad(srn)
                       case (Some(remainingBeneficiaries), CheckMode) if remainingBeneficiaries.nonEmpty =>
-                        controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+                        controllers.routes.CheckYourAnswersController.onPageLoad(srn)
                       case _ =>
                         controllers.routes.AreBeneficiariesKnownController.onPageLoad(srn, NormalMode)
                     }
@@ -96,7 +96,7 @@ class RemoveBeneficiaryController @Inject() (
                     case CheckMode =>
                       Future.successful(
                         Redirect(
-                          controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+                          controllers.routes.CheckYourAnswersController.onPageLoad(srn)
                         )
                       )
                     case _ => Future.successful(Redirect(routes.BeneficiaryListController.onPageLoad(srn)))

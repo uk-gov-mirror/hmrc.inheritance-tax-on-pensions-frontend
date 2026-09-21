@@ -68,7 +68,7 @@ class RemoveBeneficiaryControllerSpec extends SpecBase {
       (
         CheckMode,
         "CYA page",
-        controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers).url
+        controllers.routes.CheckYourAnswersController.onPageLoad(srn).url
       )
     ).foreach { (mode, modeTargetPage, modeUrl) =>
       s"in mode $mode" - {

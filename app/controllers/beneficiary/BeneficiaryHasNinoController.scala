@@ -24,7 +24,7 @@ import models.SchemeId.Srn
 import views.html.beneficiary.BeneficiaryHasNinoView
 import controllers.actions._
 import forms.beneficiary.BeneficiaryHasNinoFormProvider
-import models._
+import models.{CheckMode, Mode, NormalMode}
 import pages.beneficiary.BeneficiaryHasNinoPage
 import play.api.i18n.MessagesApi
 
@@ -91,6 +91,6 @@ class BeneficiaryHasNinoController @Inject() (
   private def nextPage(srn: Srn, mode: Mode) =
     mode match {
       case NormalMode => routes.BeneficiaryListController.onPageLoad(srn)
-      case CheckMode => controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+      case CheckMode => controllers.routes.CheckYourAnswersController.onPageLoad(srn)
     }
 }

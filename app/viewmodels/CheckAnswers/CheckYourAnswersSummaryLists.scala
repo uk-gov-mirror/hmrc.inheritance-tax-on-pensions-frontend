@@ -18,4 +18,9 @@ package viewmodels.CheckAnswers
 
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
 
-case class CheckYourAnswersSummaryLists(deceasedDetailsSummaryList: SummaryList, prDetailsSummaryList: SummaryList, paymentNoticeDetailsSummaryList: SummaryList, beneficiaryList: List[SummaryList])
+case class CheckYourAnswersSummaryLists(
+  deceasedDetailsSummaryList: SummaryList,
+  prDetailsSummaryList: SummaryList,
+  paymentNoticeDetailsSummaryList: SummaryList,
+  beneficiaryList: List[SummaryList]
+)

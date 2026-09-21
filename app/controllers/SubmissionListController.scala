@@ -21,7 +21,6 @@ import utils.SubmissionListUtil
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import config.FrontendAppConfig
 import controllers.actions.{AllowAccessActionProvider, IdentifierAction}
-import models.SummaryRole
 import views.html.SubmissionListView
 import models.SchemeId.Srn
 import play.api.i18n.I18nSupport
@@ -71,7 +70,7 @@ class SubmissionListController @Inject() (
           request.session + ("uuid" -> uuid)
         }
 
-        Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers))
+        Redirect(controllers.routes.CheckYourAnswersController.onPageLoad(srn))
           .withSession(updatedSession)
       }
 

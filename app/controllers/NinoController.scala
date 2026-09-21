@@ -23,7 +23,7 @@ import pages.NinoPage
 import controllers.actions._
 import uk.gov.hmrc.domain.Nino
 import forms.NinoFormProvider
-import models._
+import models.{CheckMode, Mode, NormalMode}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import views.html.NinoView
 import models.SchemeId.Srn
@@ -89,6 +89,6 @@ class NinoController @Inject() (
   private def nextPage(srn: Srn, mode: Mode) =
     mode match {
       case NormalMode => routes.BirthDeathDatesController.onPageLoad(srn, mode)
-      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn)
     }
 }

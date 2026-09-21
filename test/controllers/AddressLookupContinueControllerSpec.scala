@@ -55,7 +55,7 @@ class AddressLookupContinueControllerSpec extends SpecBase {
 
       List(
         (NormalMode, routes.DidPrSubmitController.onPageLoad(srn, NormalMode).url),
-        (CheckMode, routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers).url)
+        (CheckMode, routes.CheckYourAnswersController.onPageLoad(srn).url)
       ).foreach { (modeTested, expectedRedirectLocation) =>
         s"must save the selected address and redirect to the next page when ALF returns a valid address in $modeTested for ${journeyRole.name} journey" in {
 

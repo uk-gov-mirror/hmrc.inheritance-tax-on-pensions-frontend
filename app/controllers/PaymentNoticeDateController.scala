@@ -103,6 +103,6 @@ class PaymentNoticeDateController @Inject() (
         controllers.beneficiary.routes.BeneficiaryTypeController.onPageLoad(srn, 0, NormalMode)
       case CheckMode if userAnswers.get(AreBeneficiariesKnownPage).isEmpty =>
         routes.AreBeneficiariesKnownController.onPageLoad(srn, CheckMode)
-      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+      case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn)
     }
 }

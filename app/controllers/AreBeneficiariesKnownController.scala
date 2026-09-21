@@ -18,11 +18,10 @@ package controllers
 
 import services.UserAnswersService
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import models.SummaryRole.CheckYourAnswers
 import pages.{AreBeneficiariesKnownPage, DidPrSubmitPage}
 import controllers.actions._
 import forms.AreBeneficiariesKnownFormProvider
-import models._
+import models.{CheckMode, Mode, NormalMode}
 import play.api.i18n.MessagesApi
 import views.html.AreBeneficiariesKnownView
 import models.SchemeId.Srn
@@ -94,7 +93,7 @@ class AreBeneficiariesKnownController @Inject() (
     } else {
       mode match {
         case NormalMode => controllers.beneficiary.routes.BeneficiaryTypeController.onPageLoad(srn, 0, NormalMode)
-        case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn, CheckYourAnswers)
+        case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn)
       }
     }
 }

@@ -110,7 +110,7 @@ class BeneficiaryTypeController @Inject() (
           case BeneficiaryType.Trust if userAnswers.get(BeneficiaryTrustNamePage(index)).isEmpty =>
             routes.BeneficiaryTrustNameController.onPageLoad(srn, index, CheckMode)
           case _ =>
-            controllers.routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+            controllers.routes.CheckYourAnswersController.onPageLoad(srn)
         }
     }
 }

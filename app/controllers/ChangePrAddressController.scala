@@ -91,7 +91,7 @@ class ChangePrAddressController @Inject() (
 
                   userAnswersService
                     .set(updatedAnswers)(using hc, request.request)
-                    .map(_ => Redirect(routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)))
+                    .map(_ => Redirect(routes.CheckYourAnswersController.onPageLoad(srn)))
                 }
               )
           case Left(logMessage) =>

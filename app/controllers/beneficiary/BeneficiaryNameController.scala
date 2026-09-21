@@ -117,7 +117,7 @@ class BeneficiaryNameController @Inject() (
             controllers.beneficiary.routes.BeneficiaryHasNinoController.onPageLoad(srn, index, NormalMode)
           case CheckMode if userAnswers.get(BeneficiaryHasNinoPage(index)).isEmpty =>
             controllers.beneficiary.routes.BeneficiaryHasNinoController.onPageLoad(srn, index, CheckMode)
-          case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          case CheckMode => routes.CheckYourAnswersController.onPageLoad(srn)
         }
       case _ => routes.JourneyRecoveryController.onPageLoad()
     }

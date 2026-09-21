@@ -18,7 +18,6 @@ package controllers.beneficiary
 
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import models.SummaryRole.CheckYourAnswers
 import pages.DidPrSubmitPage
 import views.html.beneficiary.BeneficiaryListView
 import base.SpecBase
@@ -138,7 +137,7 @@ class BeneficiaryListControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual controllers.routes.CheckYourAnswersController
-          .onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }
@@ -187,7 +186,7 @@ class BeneficiaryListControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual controllers.routes.CheckYourAnswersController
-          .onPageLoad(srn, CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }
@@ -200,7 +199,7 @@ class BeneficiaryListControllerSpec extends SpecBase {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual controllers.routes.CheckYourAnswersController
-          .onPageLoad(srn, CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }

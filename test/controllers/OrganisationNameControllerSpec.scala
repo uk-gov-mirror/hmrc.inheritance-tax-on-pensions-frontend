@@ -184,7 +184,7 @@ class OrganisationNameControllerSpec extends SpecBase with MockitoSugar {
 
         status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual routes.CheckYourAnswersController
-          .onPageLoad(srn, SummaryRole.CheckYourAnswers)
+          .onPageLoad(srn)
           .url
       }
     }

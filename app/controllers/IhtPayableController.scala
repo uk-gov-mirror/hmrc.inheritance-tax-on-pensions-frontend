@@ -18,7 +18,6 @@ package controllers
 
 import services.UserAnswersService
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import models.SummaryRole.CheckYourAnswers
 import pages.{AreBeneficiariesKnownPage, IhtPayablePage}
 import controllers.actions._
 import forms.IhtPayableFormProvider
@@ -69,7 +68,7 @@ class IhtPayableController @Inject() (
                 saved <- userAnswersService.set(updatedAnswers)(using hc, request.request)
               } yield saved.fold(
                 _ => logAndJourneyRecovery("Unable to save the IHT payable amount"),
-                _ => Redirect(routes.CheckYourAnswersController.onPageLoad(srn, CheckYourAnswers))
+                _ => Redirect(routes.CheckYourAnswersController.onPageLoad(srn))
               )
           )
       } else {

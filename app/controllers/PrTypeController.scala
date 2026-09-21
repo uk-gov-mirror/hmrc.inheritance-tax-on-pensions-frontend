@@ -101,7 +101,7 @@ class PrTypeController @Inject() (
           case PrType.Organisation if userAnswers.get(PrOrganisationAddressPage).isEmpty =>
             routes.AddressLookupStartController.start(srn, CheckMode, JourneyRole.PrOrganisation)
           case _ =>
-            routes.CheckYourAnswersController.onPageLoad(srn, SummaryRole.CheckYourAnswers)
+            routes.CheckYourAnswersController.onPageLoad(srn)
         }
     }
 }
