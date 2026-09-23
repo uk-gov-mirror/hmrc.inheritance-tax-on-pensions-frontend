@@ -34,6 +34,5 @@ class BeneficiaryTrustNameFormProvider @Inject() extends Mappings {
             maxLength(160, "beneficiaryTrustName.error.length")
           )
         )
-
     )
 }

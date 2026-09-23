@@ -17,15 +17,16 @@
 package forms
 
 import forms.behaviours.StringFieldBehaviours
+import forms.mappings.Regex
 import play.api.data.FormError
 
-class InheritanceTaxReferenceFormProviderSpec extends StringFieldBehaviours {
+class InheritanceTaxReferenceFormProviderSpec extends StringFieldBehaviours with Regex {
 
   val requiredKey = "inheritanceTaxReference.error.required"
   val lengthKey = "inheritanceTaxReference.error.length"
   val invalidCharactersKey = "inheritanceTaxReference.error.invalid"
   val maxLength = 11
-  val validCharacterRegex = "^[A-Z]\\d{6}/\\d{2}[A-Z]$"
+  val validCharacterRegex = "^[A,F]\\d{6}/\\d{2}[A-Z]$"
 
   val form = new InheritanceTaxReferenceFormProvider()()
 
@@ -59,8 +60,8 @@ class InheritanceTaxReferenceFormProviderSpec extends StringFieldBehaviours {
       fieldWithRegex(
         form,
         fieldName,
-        "random",
-        error = FormError(fieldName, invalidCharactersKey, Seq(validCharacterRegex))
+        "B123456/01A",
+        error = FormError(fieldName, invalidCharactersKey, Seq(ihtReferenceNumberRegex))
       )
     )
   }

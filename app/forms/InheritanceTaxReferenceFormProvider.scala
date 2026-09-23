@@ -24,7 +24,7 @@ import javax.inject.Inject
 class InheritanceTaxReferenceFormProvider @Inject() extends Mappings with Regex {
 
   private def sanitiseReferenceNumber(referenceNumber: String) =
-    if (referenceNumber.matches(ihtReferenceNumberRegex.regex)) {
+    if (referenceNumber.matches(ihtReferenceNumberRegex)) {
       referenceNumber
     } else {
       referenceNumber.replaceAll("\\s+", "").toUpperCase
@@ -34,6 +34,6 @@ class InheritanceTaxReferenceFormProvider @Inject() extends Mappings with Regex 
     Form(
       "value" -> text("inheritanceTaxReference.error.required")
         .transform[String](sanitiseReferenceNumber, identity)
-        .verifying(regexp(ihtReferenceNumberRegex.regex, "inheritanceTaxReference.error.invalid"))
+        .verifying(regexp(ihtReferenceNumberRegex, "inheritanceTaxReference.error.invalid"))
     )
 }

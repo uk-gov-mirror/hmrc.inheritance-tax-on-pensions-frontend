@@ -27,7 +27,7 @@ trait Regex {
 
   val nameRegex: String = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$"
 
-  val ihtReferenceNumberRegex: matching.Regex = "^[A-Z]\\d{6}/\\d{2}[A-Z]$".r
+  val ihtReferenceNumberRegex: String = "^[A,F]\\d{6}/\\d{2}[A-Z]$"
 
   val schemeAdminIdRegex: matching.Regex = "^(A[0-9]{7})$".r
 
