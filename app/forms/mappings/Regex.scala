@@ -25,7 +25,10 @@ trait Regex {
 
   val reasonForNoNinoRegex: String = """^[a-zA-Z0-9\- \t,./()]+$"""
 
-  val nameRegex: String = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$"
+  val nameRegex: String =
+    """^[a-zA-Z\u00C0-\u00FF\u0100-\u024F\u0370-\u03FF\u0400-\u04FF]+(?:[ '-][a-zA-Z\u00C0-\u00FF\u0100-\u024F\u0370-\u03FF\u0400-\u04FF]+)*$"""
+  //fallback if above nameRegex can't be used:
+  val westEuropeanNameRegex: String = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$"
 
   val ihtReferenceNumberRegex: String = "^[A,F]\\d{6}/\\d{2}[A-Z]$"
 

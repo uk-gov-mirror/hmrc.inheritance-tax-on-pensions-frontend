@@ -32,7 +32,7 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
         "title" -> "Mr",
         "firstForename" -> "Firstname",
         "secondForename" -> "Middlename",
-        "surname" -> "Surname"
+        "surname" -> "München Kraków Αθήνα Київ"
       )
 
       val result = form.bind(data)
@@ -43,7 +43,7 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
           title = Some("Mr"),
           firstForename = "Firstname",
           secondForename = Some("Middlename"),
-          surname = "Surname"
+          surname = "München Kraków Αθήνα Київ"
         )
       )
     }
