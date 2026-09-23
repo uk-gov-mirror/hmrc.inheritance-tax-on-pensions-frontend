@@ -26,6 +26,13 @@ class OrganisationNameFormProvider @Inject() extends Mappings {
   def apply(): Form[String] =
     Form(
       "value" -> text("organisationName.error.required")
-        .verifying(maxLength(160, "organisationName.error.length"))
+        .transform[String](_.trim, identity)
+        .verifying(
+          firstError(
+            nonBlank("organisationName.error.required"),
+            regexp(orgAndTrustNameRegex, "organisationName.error.invalid"),
+            maxLength(160, "organisationName.error.length")
+          )
+        )
     )
 }

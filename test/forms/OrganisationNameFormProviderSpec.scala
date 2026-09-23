@@ -16,13 +16,15 @@
 
 package forms
 
+import forms.mappings.Regex
 import forms.behaviours.StringFieldBehaviours
 import play.api.data.FormError
 
-class OrganisationNameFormProviderSpec extends StringFieldBehaviours {
+class OrganisationNameFormProviderSpec extends StringFieldBehaviours with Regex {
 
   val requiredKey = "organisationName.error.required"
   val lengthKey = "organisationName.error.length"
+  val invalidKey = "organisationName.error.invalid"
   val maxLength = 160
 
   val form = new OrganisationNameFormProvider()()
@@ -35,7 +37,7 @@ class OrganisationNameFormProviderSpec extends StringFieldBehaviours {
       fieldThatBindsValidData(
         form,
         fieldName,
-        stringsWithMaxLength(maxLength)
+        "Org & Son Ltd. (and so)"
       )
     )
 
@@ -51,5 +53,20 @@ class OrganisationNameFormProviderSpec extends StringFieldBehaviours {
         requiredError = FormError(fieldName, requiredKey)
       )
     )
+
+    Seq(
+      "%" -> "percent sign",
+      "$" -> "dollar sign",
+      "£" -> "pound sign",
+      "a\rb" -> "carriage return",
+      "a\nb" -> "newline",
+      "\"" -> "quote"
+    ).foreach { case (invalidCharacter, description) =>
+      s"must reject a $description" in {
+        val result = form.bind(Map("value" -> invalidCharacter))
+
+        result.errors must contain(FormError("value", invalidKey, Seq(orgAndTrustNameRegex)))
+      }
+    }
   }
 }

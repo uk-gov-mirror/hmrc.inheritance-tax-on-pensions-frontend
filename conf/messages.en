@@ -207,6 +207,7 @@ organisationName.heading = Enter the name of the organisation
 organisationName.checkYourAnswersLabel = Organisation name
 organisationName.error.required = Enter the name of the organisation
 organisationName.error.length = The name of the organisation must be 160 characters or less
+organisationName.error.invalid = Enter a valid organisation name
 organisationName.change.hidden = the name of the organisation
 
 prIndividualAddress.checkYourAnswersLabel = Address of PR
@@ -366,6 +367,7 @@ beneficiaryIndividualName.checkYourAnswersLabel.hidden = the full name of the be
 beneficiaryTrustName.heading = Enter the name of the trust
 beneficiaryTrustName.error.required = Enter the name of the trust
 beneficiaryTrustName.error.length = The name of the trust should be 160 characters or less
+beneficiaryTrustName.error.invalid = Enter a valid name of the trust
 beneficiaryTrustName.checkYourAnswersLabel = Name of trust
 beneficiaryTrustName.change.hidden = the name of the trust
 

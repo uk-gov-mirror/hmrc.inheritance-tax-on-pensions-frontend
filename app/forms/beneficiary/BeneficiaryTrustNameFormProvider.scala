@@ -26,6 +26,14 @@ class BeneficiaryTrustNameFormProvider @Inject() extends Mappings {
   def apply(): Form[String] =
     Form(
       "value" -> text("beneficiaryTrustName.error.required")
-        .verifying(maxLength(160, "beneficiaryTrustName.error.length"))
+        .transform[String](_.trim, identity)
+        .verifying(
+          firstError(
+            nonBlank("beneficiaryTrustName.error.required"),
+            regexp(orgAndTrustNameRegex, "beneficiaryTrustName.error.invalid"),
+            maxLength(160, "beneficiaryTrustName.error.length")
+          )
+        )
+
     )
 }

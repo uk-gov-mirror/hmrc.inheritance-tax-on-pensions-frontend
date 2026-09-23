@@ -130,4 +130,10 @@ trait Constraints {
       case s if expectedValue.contains(s) => Valid
       case _ => Invalid(errorKey)
     }
+
+  protected def nonBlank(errorKey: String): Constraint[String] =
+    Constraint {
+      case value if value.nonEmpty => Valid
+      case _ => Invalid(errorKey)
+    }
 }

@@ -31,4 +31,6 @@ trait Regex {
 
   val schemeAdminIdRegex: matching.Regex = "^(A[0-9]{7})$".r
 
+  val orgAndTrustNameRegex: String = "^[a-zA-ZÀ-ÖØ-öø-ÿ0-9 \\-,.'\\/@_\\[\\]\\(\\)\\&]+$"
+
 }

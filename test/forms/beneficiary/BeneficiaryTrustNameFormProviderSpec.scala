@@ -17,9 +17,10 @@
 package forms.beneficiary
 
 import base.SpecBase
+import forms.mappings.Regex
 import play.api.data.FormError
 
-class BeneficiaryTrustNameFormProviderSpec extends SpecBase {
+class BeneficiaryTrustNameFormProviderSpec extends SpecBase with Regex {
 
   private val form = new BeneficiaryTrustNameFormProvider()()
 
@@ -31,8 +32,8 @@ class BeneficiaryTrustNameFormProviderSpec extends SpecBase {
       form.bind(validData).value.value mustEqual trustName
     }
 
-    "must accept punctuation in the name" in {
-      val name = s"$trustName %.$$£,"
+    "must accept punctuation and ampersand in the name" in {
+      val name = s"$trustName & Co."
       val result = form.bind(Map("value" -> name))
 
       result.value.value mustEqual name
@@ -54,5 +55,19 @@ class BeneficiaryTrustNameFormProviderSpec extends SpecBase {
       )
     }
 
+    Seq(
+      "%" -> "percent sign",
+      "$" -> "dollar sign",
+      "£" -> "pound sign",
+      "a\rb" -> "carriage return",
+      "a\nb" -> "newline",
+      "\"" -> "quote"
+    ).foreach { case (invalidCharacter, description) =>
+      s"must reject a $description" in {
+        val result = form.bind(Map("value" -> invalidCharacter))
+
+        result.errors must contain(FormError("value", "beneficiaryTrustName.error.invalid", Seq(orgAndTrustNameRegex)))
+      }
+    }
   }
 }
