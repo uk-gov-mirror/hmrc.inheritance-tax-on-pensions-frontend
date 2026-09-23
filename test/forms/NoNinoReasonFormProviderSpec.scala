@@ -16,16 +16,16 @@
 
 package forms
 
+import forms.mappings.Regex
 import forms.behaviours.StringFieldBehaviours
 import play.api.data.FormError
 
-class NoNinoReasonFormProviderSpec extends StringFieldBehaviours {
+class NoNinoReasonFormProviderSpec extends StringFieldBehaviours with Regex {
 
   val requiredKey = "noNinoReason.error.required"
   val invalidCharactersKey = "noNinoReason.error.invalid"
   val lengthKey = "noNinoReason.error.length"
   val maxLength = 160
-  val validCharacterRegex = """^[a-zA-Z0-9\-’`'" \t,.@/&()]+$"""
 
   val form = new NoNinoReasonFormProvider()()
 
@@ -49,13 +49,25 @@ class NoNinoReasonFormProviderSpec extends StringFieldBehaviours {
       )
     )
 
-    behave.like(
-      fieldContainsRegexError(
-        form,
-        fieldName,
-        "random",
-        error = FormError(fieldName, invalidCharactersKey, Seq(validCharacterRegex))
-      )
+    Seq(
+      "%" -> "percent sign",
+      "$" -> "dollar sign",
+      "£" -> "pound sign",
+      "abc\rabc" -> "carriage return",
+      "abc\nabc" -> "newline",
+      "\"" -> "quote",
+      "&" -> "ampersand"
+    ).foreach((invalidCharacter, description) =>
+      s"for $description" - {
+        behave.like(
+          fieldContainsRegexError(
+            form,
+            fieldName,
+            invalidCharacter,
+            error = FormError(fieldName, invalidCharactersKey, Seq(reasonForNoNinoRegex))
+          )
+        )
+      }
     )
   }
 }

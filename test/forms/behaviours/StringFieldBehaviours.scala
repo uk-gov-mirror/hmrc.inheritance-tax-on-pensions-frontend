@@ -35,7 +35,7 @@ trait StringFieldBehaviours extends FieldBehaviours {
   def fieldContainsRegexError(form: Form[?], fieldName: String, invalidString: String, error: FormError): Unit =
     "not bind strings invalidated by regex" in {
       val result = form.bind(Map(fieldName -> invalidString)).apply(fieldName)
-      result.errors contains error
+      result.errors must contain(error)
     }
 
 }

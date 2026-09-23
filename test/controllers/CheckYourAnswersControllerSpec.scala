@@ -16,21 +16,22 @@
 
 package controllers
 
-import play.api.test.Helpers.*
-import pages.*
+import play.api.test.Helpers._
+import pages._
 import viewmodels.CheckAnswers.beneficiary.{BeneficiaryHasNinoSummary, BeneficiaryTypeSummary}
 import views.html.CheckYourAnswersView
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{Actions, SummaryList}
 import viewmodels.govuk.all.{ActionItemViewModel, CardViewModel, SummaryListViewModel}
 import play.api.libs.json.Json
-import models.*
-import viewmodels.CheckAnswers.*
+import models._
+import viewmodels.CheckAnswers._
 import models.JourneyRole.{Deceased, PrIndividual}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 import base.SpecBase
 
-import scala.jdk.CollectionConverters.*
+import scala.jdk.CollectionConverters._
+
 import java.time.LocalDate
 
 class CheckYourAnswersControllerSpec extends SpecBase {

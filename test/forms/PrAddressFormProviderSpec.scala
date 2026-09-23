@@ -80,7 +80,7 @@ class PrAddressFormProviderSpec extends AnyFreeSpec with Matchers with Regex {
     }
 
     "must accept characters other than percent, dollar and pound signs" in {
-      val result = form.bind(validData.updated("addressline1", "Flat #2: \"Rear\" @ Block_B; [A]?"))
+      val result = form.bind(validData.updated("addressline1", "Flat #2: Rear @ Block_B; [A]?"))
 
       result.errors mustBe empty
     }
@@ -96,7 +96,9 @@ class PrAddressFormProviderSpec extends AnyFreeSpec with Matchers with Regex {
         "$" -> "dollar sign",
         "£" -> "pound sign",
         "\r" -> "carriage return",
-        "\n" -> "newline"
+        "\n" -> "newline",
+        "\"" -> "quote",
+        "&" -> "ampersand"
       ).foreach { case (invalidCharacter, description) =>
         s"must reject a $description in $field" in {
           val result = form.bind(validData.updated(field, s"Invalid${invalidCharacter}Value"))

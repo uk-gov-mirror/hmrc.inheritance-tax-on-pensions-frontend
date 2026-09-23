@@ -98,6 +98,25 @@ class IndividualNameFormProviderSpec extends forms.behaviours.StringFieldBehavio
       )
     }
 
+    "must fail when fields contain invalid script characters" in {
+
+      val result = form.bind(
+        Map(
+          "title" -> "M<",
+          "firstForename" -> "Firstname>",
+          "secondForename" -> "Middlename\"",
+          "surname" -> "Surname&"
+        )
+      )
+
+      (result.errors.map(_.message) must contain).allOf(
+        "prIndividualName.error.title.pattern",
+        "prIndividualName.error.firstForename.pattern",
+        "prIndividualName.error.secondForename.pattern",
+        "prIndividualName.error.surname.pattern"
+      )
+    }
+
     "must only return the highest priority error for each field" in {
 
       val tooLongAndInvalidName = s"${"A" * 36}1"
