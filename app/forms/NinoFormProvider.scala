@@ -26,7 +26,7 @@ class NinoFormProvider @Inject() extends Mappings {
 
   def apply(): Form[Nino] =
     Form(
-      "value" -> ninoV2(
+      "value" -> nino(
         requiredKey = "nino.error.required",
         invalidKey = "nino.error.invalid"
       )

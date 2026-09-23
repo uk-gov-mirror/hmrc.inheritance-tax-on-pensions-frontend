@@ -31,7 +31,7 @@ trait Mappings extends Formatters with Constraints with Regex {
   protected def text(errorKey: String = "error.required", args: Seq[String] = Seq.empty): FieldMapping[String] =
     of(using stringFormatter(errorKey, args))
 
-  protected def ninoV2(
+  protected def nino(
     requiredKey: String,
     invalidKey: String,
     args: Seq[String] = Seq.empty
@@ -39,15 +39,6 @@ trait Mappings extends Formatters with Constraints with Regex {
     text(requiredKey, args)
       .verifying(invalidKey, s => Nino.isValid(s.filterNot(_.isWhitespace).toUpperCase))
       .transform[Nino](s => Nino(s.filterNot(_.isWhitespace).toUpperCase), _.nino.filterNot(_.isWhitespace).toUpperCase)
-
-  protected def nino(
-    requiredKey: String,
-    invalidKey: String,
-    args: Seq[String] = Seq.empty
-  ): Mapping[String] =
-    text(requiredKey, args)
-      .transform[String](_.replaceAll("\\s+", "").toUpperCase, identity)
-      .verifying(regexp(ninoRegex, invalidKey))
 
   protected def validatedText(
     requiredKey: String,

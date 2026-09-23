@@ -23,8 +23,6 @@ trait Regex {
 
   val ukPostcodeRegex: String = """^GIR ?0AA$|^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"""
 
-  val ninoRegex: String = """^(?!BG|GB|KN|NK|NT|TN|ZZ)[ABCEGHJKLMNOPRSTWXYZ][ABCEGHJKLMNPRSTWXYZ][0-9]{6}[ABCD]$"""
-
   val reasonForNoNinoRegex: String = """^[a-zA-Z0-9\- \t,./()]+$"""
 
   val nameRegex: String = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$"
