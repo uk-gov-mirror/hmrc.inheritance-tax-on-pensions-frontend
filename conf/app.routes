@@ -141,10 +141,12 @@ POST        /:srn/remove-beneficiary/$index<[1-2]?[0-9]>               controlle
 GET         /:srn/change-remove-beneficiary/$index<[1-2]?[0-9]>        controllers.beneficiary.RemoveBeneficiaryController.onPageLoad(srn: Srn, mode: Mode = CheckMode, index: Int)
 POST        /:srn/change-remove-beneficiary/$index<[1-2]?[0-9]>        controllers.beneficiary.RemoveBeneficiaryController.onSubmit(srn: Srn, mode: Mode = CheckMode, index: Int)
 
-GET         /:srn/enter-beneficiary-address/$index<[1-2]?[0-9]>     controllers.beneficiary.BeneficiaryAddressController.start(srn: Srn, index: Int, mode: Mode = NormalMode)
-GET         /:srn/change-beneficiary-address/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryAddressController.start(srn: Srn, index: Int, mode: Mode = CheckMode)
-GET         /:srn/beneficiary-address-lookup-continue/normalmode/$index<[1-2]?[0-9]> controllers.beneficiary.BeneficiaryAddressController.continue(srn: Srn, index: Int, mode: Mode = NormalMode, id: String ?= "")
-GET         /:srn/beneficiary-address-lookup-continue/checkmode/$index<[1-2]?[0-9]> controllers.beneficiary.BeneficiaryAddressController.continue(srn: Srn, index: Int, mode: Mode = CheckMode, id: String ?= "")
+GET         /:srn/enter-beneficiary-address/$index<[1-2]?[0-9]>                         controllers.beneficiary.BeneficiaryAddressController.start(srn: Srn, index: Int, mode: Mode = NormalMode)
+GET         /:srn/change-beneficiary-address/$index<[1-2]?[0-9]>                        controllers.beneficiary.BeneficiaryAddressController.start(srn: Srn, index: Int, mode: Mode = CheckMode)
+GET         /:srn/change-beneficiary-address-manual/$index<[1-2]?[0-9]>                 controllers.beneficiary.ChangeBeneficiaryAddressController.onPageLoad(srn: Srn, index: Int)
+POST        /:srn/change-beneficiary-address-manual/$index<[1-2]?[0-9]>                 controllers.beneficiary.ChangeBeneficiaryAddressController.onSubmit(srn: Srn, index: Int)
+GET         /:srn/beneficiary-address-lookup-continue/normalmode/$index<[1-2]?[0-9]>    controllers.beneficiary.BeneficiaryAddressController.continue(srn: Srn, index: Int, mode: Mode = NormalMode, id: String ?= "")
+GET         /:srn/beneficiary-address-lookup-continue/checkmode/$index<[1-2]?[0-9]>     controllers.beneficiary.BeneficiaryAddressController.continue(srn: Srn, index: Int, mode: Mode = CheckMode, id: String ?= "")
 
 GET         /:srn/beneficiary-national-insurance-number/$index<[1-2]?[0-9]>        controllers.beneficiary.BeneficiaryHasNinoController.onPageLoad(srn: Srn, index: Int, mode: Mode = NormalMode)
 POST        /:srn/beneficiary-national-insurance-number/$index<[1-2]?[0-9]>        controllers.beneficiary.BeneficiaryHasNinoController.onSubmit(srn: Srn, index: Int, mode: Mode = NormalMode)

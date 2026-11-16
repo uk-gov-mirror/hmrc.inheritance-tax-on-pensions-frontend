@@ -1,0 +1,125 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import components.PageHeading
+@import config.Constants.Css
+@import models.JourneyRole
+@import models.SchemeId.Srn
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukInput}
+@import viewmodels.InputWidth._
+@import viewmodels.govuk.all._
+@import views.ViewUtils.title
+
+@this(
+    layout: templates.Layout,
+    formHelper: FormWithCSRF,
+    pageHeading: PageHeading,
+    govukErrorSummary: GovukErrorSummary,
+    govukInput: GovukInput,
+    govukButton: GovukButton
+)
+
+@(form: Form[?], srn: Srn, index: Int, displayName: String, isUkAddress: Boolean)(implicit request: Request[?], messages: Messages)
+
+@layout(pageTitle = title(form, messages("changePrAddress.title"))) {
+
+    @formHelper(action = controllers.beneficiary.routes.ChangeBeneficiaryAddressController.onSubmit(srn, index)) {
+
+        @if(form.errors.nonEmpty) {
+            @govukErrorSummary(ErrorSummaryViewModel(form))
+        }
+
+        @pageHeading(
+            messages("changePrAddress.heading", displayName),
+            classes = s"${Css.headingLCssClass} govuk-!-margin-bottom-6"
+        )
+
+        @govukInput(
+            InputViewModel(
+                field = form("addressLine1"),
+                label = LabelViewModel(messages("changePrAddress.addressLine1"))
+                    .withCssClass("govuk-label--s")
+            )
+            .withWidth(Fixed20)
+            .withAutocomplete("address-line1")
+            .withSpellcheck(on = false)
+        )
+
+        @govukInput(
+            InputViewModel(
+                field = form("addressLine2"),
+                label = LabelViewModel(messages("changePrAddress.addressLine2"))
+                    .withCssClass("govuk-label--s")
+            )
+            .withWidth(Fixed20)
+            .withAutocomplete("address-line2")
+            .withSpellcheck(on = false)
+        )
+
+        @govukInput(
+            InputViewModel(
+                field = form("addressLine3"),
+                label = LabelViewModel(messages("changePrAddress.addressLine3"))
+                    .withCssClass("govuk-label--s")
+            )
+            .withWidth(Fixed20)
+            .withAutocomplete("address-line3")
+            .withSpellcheck(on = false)
+        )
+
+        @govukInput(
+            InputViewModel(
+                field = form("addressLine4"),
+                label = LabelViewModel(messages("changePrAddress.addressLine4"))
+                    .withCssClass("govuk-label--s")
+            )
+            .withWidth(Fixed20)
+            .withAutocomplete("address-level2")
+            .withSpellcheck(on = false)
+        )
+
+        @if(isUkAddress) {
+            @govukInput(
+                InputViewModel(
+                    field = form("postCode"),
+                    label = LabelViewModel(
+                        messages("changePrAddress.postcode")
+                    ).withCssClass("govuk-label--s")
+                )
+                .withWidth(Fixed10)
+                .withAutocomplete("postal-code")
+                .withSpellcheck(on = false)
+            )
+        }
+
+        @if(!isUkAddress) {
+            @govukInput(
+                InputViewModel(
+                    field = form("addressLine5"),
+                    label = LabelViewModel(messages("changePrAddress.postalCode"))
+                        .withCssClass("govuk-label--s")
+                )
+                .withWidth(Fixed10)
+                .withAutocomplete("address-line5")
+                .withSpellcheck(on = false)
+            )
+        }
+
+        @govukButton(
+            ButtonViewModel(messages("site.saveAndContinue"))
+        )
+    }
+}

@@ -21,7 +21,7 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 import models.SchemeId.Srn
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
-import models.{CheckMode, UserAnswers}
+import models.UserAnswers
 import pages.beneficiary.BeneficiaryAddressPage
 import play.api.i18n.Messages
 import viewmodels.govuk.summarylist._
@@ -48,7 +48,7 @@ object BeneficiaryAddressSummary {
         actions = Seq(
           ActionItemViewModel(
             "site.change",
-            controllers.beneficiary.routes.BeneficiaryAddressController.start(srn, index, CheckMode).url
+            controllers.beneficiary.routes.ChangeBeneficiaryAddressController.onPageLoad(srn, index).url
           ).withVisuallyHiddenText(
             messages(
               "beneficiaryAddress.change.hidden",
